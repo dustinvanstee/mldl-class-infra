@@ -65,14 +65,19 @@ ARG CACHE_DATE=2017-09-26
 
 #add wbc example 
 # Add Dustins DSX Example
-WORKDIR /root/data
-RUN wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
-WORKDIR /root
+
+#
+#WORKDIR /root/data
+#RUN wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
+#WORKDIR /root
 RUN git clone https://github.com/dustinvanstee/mldl-101.git && \
     git clone https://github.com/llSourcell/tensorflow_chatbot.git
-ADD startjupyter.sh /root
-ADD cpuonly.sh /root
-ADD setup_powerai_env.sh /root
+#ADD startjupyter.sh /root
+#ADD cpuonly.sh /root
+#ADD setup_powerai_env.sh /root
+
+
+
 #RUN git clone https://github.com/dhruvp/wbc-classification.git
 #EXPOSE 5555
 #RUN /bin/bash -c "mkdir -p /data/mldl-101/; cd /data/mldl-101/" 

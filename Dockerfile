@@ -82,4 +82,4 @@ COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 ENTRYPOINT ["/bin/bash"]
 #CMD ["/usr/bin/supervisord", "-n","-c" ,"/etc/supervisor/supervisord.conf"]
-#CMD ["ls"]
+#CMD ["ls"a]

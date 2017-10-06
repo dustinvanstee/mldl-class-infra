@@ -1,5 +1,5 @@
 {
-    "name": "mldl-education",
+    "name": "mldl_education",
     "description": "Access Jupyter Notebooks from ports 8890. SSH into instance with user id: nimbix@<fqdn> and password from the Dashboard. Run sudo su followed by jupyter notebook list to find the tokens to login to the Jupyter notebook servers. The container runs for a max of 2 hours",
     "author": "vanstee@us.ibm.com",
     "licensed": true,

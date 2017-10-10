@@ -39,13 +39,15 @@ RUN apt-get update && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 
+RUN pip install --upgrade pip
 RUN pip install numpy scipy
 RUN pip install scikit-learn
+RUN pip install --upgrade scikit-learn
 RUN pip install pillow
 RUN pip install h5py
 RUN pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
 RUN pip install keras
-
+RUN pip install seaborn
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install build-essential cmake pkg-config

@@ -67,20 +67,13 @@ ARG CACHE_DATE=2017-09-26
 #
 WORKDIR /tmp
 RUN git clone https://github.com/dustinvanstee/mldl-101.git 
-# git clone https://github.com/llSourcell/tensorflow_chatbot.git
-# ADD startjupyter.sh /root
-# ADD cpuonly.sh /root
-# ADD setup_powerai_env.sh /root
 
 
+ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
+RUN bash /tmp/bootstrap.sh
 
-#RUN git clone https://github.com/dhruvp/wbc-classification.git
-#EXPOSE 5555
-#RUN /bin/bash -c "mkdir -p /data/mldl-101/; cd /data/mldl-101/" 
 
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 ENTRYPOINT ["/bin/bash"]
-#CMD ["/usr/bin/supervisord", "-n","-c" ,"/etc/supervisor/supervisord.conf"]
-#CMD ["ls"a]

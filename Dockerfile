@@ -67,10 +67,12 @@ ARG CACHE_DATE=2017-09-26
 #
 #WORKDIR /tmp
 #RUN git clone https://github.com/dustinvanstee/mldl-101.git 
-
-
-ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
-RUN bash /tmp/bootstrap.sh
+RUN echo 'mkdir -p /home/nimbix/class'  >  /tmp/bootstrap2.sh
+RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /tmp/bootstrap2.sh
+RUN chmod 777 /tmp/bootstrap2.sh
+RUN /tmp/bootstrap2.sh
+#ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
+#RUN bash /tmp/bootstrap.sh
 
 
 #add NIMBIX application

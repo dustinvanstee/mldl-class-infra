@@ -65,8 +65,8 @@ ARG CACHE_DATE=2017-09-26
 # Add Dustins DSX Example
 
 #
-WORKDIR /tmp
-RUN git clone https://github.com/dustinvanstee/mldl-101.git 
+#WORKDIR /tmp
+#RUN git clone https://github.com/dustinvanstee/mldl-101.git 
 
 
 ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh

@@ -9,11 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 #add startupscripts
 RUN apt-get install -y supervisor
 
-#WORKDIR /root
-#ADD startjupyter.sh /root/
-#ADD conf.d/* /etc/supervisor/conf.d/
-#ADD rc.local /etc/rc.local
-
+# Install packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     git \
     vim \
@@ -69,14 +65,12 @@ ARG CACHE_DATE=2017-09-26
 # Add Dustins DSX Example
 
 #
-#WORKDIR /root/data
-#RUN wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
-#WORKDIR /root
-RUN git clone https://github.com/dustinvanstee/mldl-101.git && \
-    git clone https://github.com/llSourcell/tensorflow_chatbot.git
-#ADD startjupyter.sh /root
-#ADD cpuonly.sh /root
-#ADD setup_powerai_env.sh /root
+WORKDIR /tmp
+RUN git clone https://github.com/dustinvanstee/mldl-101.git 
+# git clone https://github.com/llSourcell/tensorflow_chatbot.git
+# ADD startjupyter.sh /root
+# ADD cpuonly.sh /root
+# ADD setup_powerai_env.sh /root
 
 
 

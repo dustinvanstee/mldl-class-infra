@@ -59,7 +59,7 @@ RUN apt-get -y install lsof
 RUN apt-get -y install locate
 RUN updatedb
 
-ARG CACHE_DATE=2017-09-26
+ENV CACHE_DATE=2017-09-26
 
 #add wbc example 
 # Add Dustins DSX Example
@@ -69,6 +69,7 @@ ARG CACHE_DATE=2017-09-26
 #RUN git clone https://github.com/dustinvanstee/mldl-101.git 
 RUN echo 'mkdir -p /home/nimbix/class'  >  /tmp/bootstrap2.sh
 RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /tmp/bootstrap2.sh
+RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-class-infra.git'  >> /tmp/bootstrap2.sh
 RUN chmod 777 /tmp/bootstrap2.sh
 RUN /tmp/bootstrap2.sh
 #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
@@ -79,3 +80,4 @@ RUN /tmp/bootstrap2.sh
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/home/nimbix/class/mldl-101/startClass.sh"]

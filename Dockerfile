@@ -10,11 +10,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install -y supervisor
 RUN apt-get install -y git
 
-RUN echo 'mkdir -p /home/nimbix/class'  >  /tmp/bootstrap2.sh
-RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /tmp/bootstrap2.sh
-RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-class-infra.git'  >> /tmp/bootstrap2.sh
-RUN chmod 777 /tmp/bootstrap2.sh
-RUN /tmp/bootstrap2.sh
+RUN echo 'mkdir -p /home/nimbix/class'  >  /home/nimbix/bootstrap2.sh
+RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /home/nimbix/bootstrap2.sh
+RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-class-infra.git'  >> /home/nimbix/bootstrap2.sh
+RUN chmod 777 /home/nimbix/bootstrap2.sh
+RUN /home/nimbix/bootstrap2.sh
+
+COPY bootstrap.sh /root
+RUN wget https://github.com/dustinvanstee/mldl-class-infra/raw/master/cpuonly.sh
 
 # Install packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \

@@ -73,8 +73,8 @@ COPY bootstrap.sh /home/nimbix
 #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
 #RUN bash /tmp/bootstrap.sh
 
-#COPY NAE/AppDef.json /etc/NAE/AppDef.json
 #add NIMBIX application
-#RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
+COPY AppDef.json /etc/NAE/AppDef.json
+RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 #ENTRYPOINT ["/bin/bash"]
 #ENTRYPOINT ["/home/nimbix/class/mldl-101/startClass.sh"]

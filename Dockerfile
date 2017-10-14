@@ -8,10 +8,16 @@ RUN pip install ipython==5.0 notebook==5.0 pyyaml
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 #add startupscripts
 RUN apt-get install -y supervisor
+RUN apt-get -y git
+
+RUN echo 'mkdir -p /home/nimbix/class'  >  /tmp/bootstrap2.sh
+RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /tmp/bootstrap2.sh
+RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-class-infra.git'  >> /tmp/bootstrap2.sh
+RUN chmod 777 /tmp/bootstrap2.sh
+RUN /tmp/bootstrap2.sh
 
 # Install packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \
-    git \
     vim \
     jed \
     emacs \
@@ -57,7 +63,6 @@ RUN apt-get -y install python-opencv
 
 RUN apt-get -y install lsof
 RUN apt-get -y install locate
-RUN updatedb
 
 ENV CACHE_DATE=2017-09-26
 
@@ -67,11 +72,6 @@ ENV CACHE_DATE=2017-09-26
 #
 #WORKDIR /tmp
 #RUN git clone https://github.com/dustinvanstee/mldl-101.git 
-RUN echo 'mkdir -p /home/nimbix/class'  >  /tmp/bootstrap2.sh
-RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /tmp/bootstrap2.sh
-RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-class-infra.git'  >> /tmp/bootstrap2.sh
-RUN chmod 777 /tmp/bootstrap2.sh
-RUN /tmp/bootstrap2.sh
 #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
 #RUN bash /tmp/bootstrap.sh
 
@@ -79,5 +79,5 @@ RUN /tmp/bootstrap2.sh
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/bash"]
 #ENTRYPOINT ["/home/nimbix/class/mldl-101/startClass.sh"]

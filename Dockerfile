@@ -78,9 +78,8 @@ ENV CACHE_DATE=2017-09-26
 #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
 #RUN bash /tmp/bootstrap.sh
 
-
+ADD ./NAE/AppDef.json /etc/NAE/AppDef.json
 #add NIMBIX application
-COPY AppDef.json /etc/NAE/AppDef.json
-RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
+#RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 #ENTRYPOINT ["/bin/bash"]
 #ENTRYPOINT ["/home/nimbix/class/mldl-101/startClass.sh"]

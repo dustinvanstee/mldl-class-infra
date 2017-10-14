@@ -10,15 +10,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install -y supervisor
 RUN apt-get install -y git
 
-RUN echo 'mkdir -p /home/nimbix/class'  >  /home/nimbix/bootstrap2.sh
-RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /home/nimbix/bootstrap2.sh
-RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-class-infra.git'  >> /home/nimbix/bootstrap2.sh
-RUN chmod 777 /home/nimbix/bootstrap2.sh
-RUN /home/nimbix/bootstrap2.sh
-
-COPY bootstrap.sh /root
-RUN wget https://github.com/dustinvanstee/mldl-class-infra/raw/master/cpuonly.sh
-
 # Install packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     vim \
@@ -69,6 +60,9 @@ RUN apt-get -y install locate
 
 ENV CACHE_DATE=2017-09-26
 
+COPY bootstrap.sh /root
+RUN  bash /root/bootstrap.sh
+
 #add wbc example 
 # Add Dustins DSX Example
 
@@ -78,7 +72,7 @@ ENV CACHE_DATE=2017-09-26
 #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
 #RUN bash /tmp/bootstrap.sh
 
-ADD ./NAE/AppDef.json /etc/NAE/AppDef.json
+COPY NAE/AppDef.json /etc/NAE/AppDef.json
 #add NIMBIX application
 #RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 #ENTRYPOINT ["/bin/bash"]

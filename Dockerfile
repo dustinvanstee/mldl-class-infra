@@ -61,6 +61,7 @@ RUN apt-get -y install locate
 ENV CACHE_DATE=2017-09-27
 
 COPY bootstrap.sh /root
+COPY bootstrap.sh /home/nimbix
 #RUN  bash /root/bootstrap.sh
 
 #add wbc example 

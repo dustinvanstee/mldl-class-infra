@@ -8,7 +8,7 @@ RUN pip install ipython==5.0 notebook==5.0 pyyaml
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 #add startupscripts
 RUN apt-get install -y supervisor
-RUN apt-get -y git
+RUN apt-get install -y git
 
 RUN echo 'mkdir -p /home/nimbix/class'  >  /tmp/bootstrap2.sh
 RUN echo 'cd /home/nimbix/class; git clone https://github.com/dustinvanstee/mldl-101.git'  >> /tmp/bootstrap2.sh

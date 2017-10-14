@@ -58,10 +58,10 @@ RUN apt-get -y install python-opencv
 RUN apt-get -y install lsof
 RUN apt-get -y install locate
 
-ENV CACHE_DATE=2017-09-26
+ENV CACHE_DATE=2017-09-27
 
 COPY bootstrap.sh /root
-RUN  bash /root/bootstrap.sh
+#RUN  bash /root/bootstrap.sh
 
 #add wbc example 
 # Add Dustins DSX Example
@@ -72,7 +72,7 @@ RUN  bash /root/bootstrap.sh
 #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
 #RUN bash /tmp/bootstrap.sh
 
-COPY NAE/AppDef.json /etc/NAE/AppDef.json
+#COPY NAE/AppDef.json /etc/NAE/AppDef.json
 #add NIMBIX application
 #RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 #ENTRYPOINT ["/bin/bash"]

@@ -35,31 +35,7 @@
             "scale_max": 1,
             "walltime": "04:00:00",
             "parameters": {}
-        } ,
-        "TensorFlow": {
-            "path": "/usr/local/bin/nimbix_notebook",
-            "interactive": true,
-            "name": "TensorFlow&trade;",
-            "description": "Launch a Jupyter Notebook to use TensorFlow&trade; directly in your browser.",
-            "parameters": {
-                "-s": {
-                    "name": "-s",
-                    "description": "-s",
-                    "type": "CONST",
-                    "value": "/opt/DL/tensorflow/bin/tensorflow-activate",
-                    "positional": false,
-                    "required": true
-                },
-                "-r": {
-                    "name": "Requirements file",
-                    "description": "Select a text file to use as a list of pip requirements (e.g. requirements.txt)",
-                    "type": "FILE",
-                    "positional": false,
-                    "required": false,
-                    "filter": "*.txt"
-                }
-            }
-        }
+       }
     },
     "image": {
         "type": "image/jpeg",

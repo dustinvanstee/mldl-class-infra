@@ -26,16 +26,7 @@
             "scale_max": 1,
             "walltime": "04:00:00",
             "parameters": {}
-        } ,
-        "Custom": {
-            "path": "/root/wrap_sbin_init.sh",
-            "interactive": true,
-            "name": "Custom",
-            "description": "Launch a session with all boot services, including SSH.  Connection address and credentials will appear in your web browser once available.",
-            "scale_max": 1,
-            "walltime": "04:00:00",
-            "parameters": {}
-       }
+        } 
     },
     "image": {
         "type": "image/jpeg",

@@ -61,11 +61,15 @@ RUN apt-get -y install locate
 ENV CACHE_DATE=2017-10-14a
 
 COPY bootstrap.sh /root
-COPY bootstrap.sh /home/nimbix
 #RUN  bash /root/bootstrap.sh
 
 #add wbc example 
 # Add Dustins DSX Example
+
+#RUN mkdir -p /db && chown nimbix:nimbix /db
+USER nimbix
+RUN git clone https://github.com/dustinvanstee/mldl-101.git 
+USER root
 
 #
 #WORKDIR /tmp
@@ -78,3 +82,6 @@ COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
 #ENTRYPOINT ["/bin/bash"]
 #ENTRYPOINT ["/home/nimbix/class/mldl-101/startClass.sh"]
+
+USER nimbix
+CMD ["sudo /root/startClass2.sh"]

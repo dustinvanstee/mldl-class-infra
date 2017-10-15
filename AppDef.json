@@ -28,7 +28,7 @@
             "parameters": {}
         } ,
         "Custom": {
-            "path": "/root/bootstrap.sh",
+            "path": "/root/wrap_sbin_init.sh",
             "interactive": true,
             "name": "Custom",
             "description": "Launch a session with all boot services, including SSH.  Connection address and credentials will appear in your web browser once available.",

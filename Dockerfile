@@ -58,17 +58,13 @@ RUN apt-get -y install python-opencv
 RUN apt-get -y install lsof
 RUN apt-get -y install locate
 
-ENV CACHE_DATE=2017-10-14a
+ENV CACHE_DATE=2017-10-14b
 
 COPY bootstrap.sh /root
-#RUN  bash /root/bootstrap.sh
+COPY wrap_sbin_init.sh /root
 
-#add wbc example 
-# Add Dustins DSX Example
-
-#RUN mkdir -p /db && chown nimbix:nimbix /db
 USER nimbix
-RUN git clone https://github.com/dustinvanstee/mldl-101.git 
+RUN mkdir -p /db && chown nimbix:nimbix /db && cd /db && git clone https://github.com/dustinvanstee/mldl-101.git 
 USER root
 
 #
@@ -80,8 +76,4 @@ USER root
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
-#ENTRYPOINT ["/bin/bash"]
-#ENTRYPOINT ["/home/nimbix/class/mldl-101/startClass.sh"]
 
-USER nimbix
-CMD ["sudo /root/startClass2.sh"]

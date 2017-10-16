@@ -44,6 +44,7 @@ RUN pip install h5py
 RUN pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
 RUN pip install keras
 RUN pip install seaborn
+RUN pip install graphviz
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install build-essential cmake pkg-config

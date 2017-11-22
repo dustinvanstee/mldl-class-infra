@@ -59,13 +59,30 @@ RUN apt-get -y install python-opencv
 RUN apt-get -y install lsof
 RUN apt-get -y install locate
 
-ENV CACHE_DATE=2017-10-14b
+ENV CACHE_DATE=2017-11-14
+
+RUN apt-get -y install iputils-ping && \
+    apt-get -y install software-properties-common && \
+    add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
+    apt update -qq 
+
 
 COPY bootstrap.sh /root
 COPY wrap_sbin_init.sh /root
 
-USER nimbix
-RUN mkdir -p /db && chown nimbix:nimbix /db && cd /db && git clone https://github.com/dustinvanstee/mldl-101.git 
+# for Nimbix, USER nimbix, for now use root
+USER root
+RUN mkdir -p /data2 && chown nimbix:nimbix /data2 && cd /data2 && \
+  git clone https://github.com/dustinvanstee/mldl-101.git && \
+  git clone https://github.com/dustinvanstee/nba-rt-prediction.git && \
+  wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
+  tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz
+
+#RUN DEBIAN_FRONTEND=noninteractive apt -y install ibm-java80-jdk ibm-java80-jre 
+
+ENV JAVA_HOME=/usr/lib/jvm/ibm-java80-jdk-ppc64le
+ENV SPARK_HOME=/data2/spark-2.2.0-bin-hadoop2.7
+
 USER root
 
 #

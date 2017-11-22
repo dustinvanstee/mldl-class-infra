@@ -76,12 +76,14 @@ RUN mkdir -p /data2 && chown nimbix:nimbix /data2 && cd /data2 && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
   git clone https://github.com/dustinvanstee/nba-rt-prediction.git && \
   wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
-  tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz
+  wget http://apache.claz.org/spark/spark-2.1.2/spark-2.1.2-bin-hadoop2.7.tgz && \
+  tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz && \
+  tar -zxvf spark-2.1.2-bin-hadoop2.7.tgz
 
-#RUN DEBIAN_FRONTEND=noninteractive apt -y install ibm-java80-jdk ibm-java80-jre 
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-8-jdk
 
-ENV JAVA_HOME=/usr/lib/jvm/ibm-java80-jdk-ppc64le
-ENV SPARK_HOME=/data2/spark-2.2.0-bin-hadoop2.7
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el
+ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
 
 USER root
 

@@ -18,12 +18,42 @@
         "OBJECT"
     ],
     "commands": {
+    "run": {
+            "path": "/bin/bash",
+            "interactive": false,
+            "name": "Batch",
+            "description": "Run a batch command using /bin/bash.  The output may be monitored directly in your web browser.",
+            "parameters": {
+                "-l": {
+                    "name": "-l",
+                    "description": "-l",
+                    "type": "CONST",
+                    "value": "-l",
+                    "positional": true,
+                    "required": true
+                },
+                "-c": {
+                    "name": "-c",
+                    "description": "-c",
+                    "type": "CONST",
+                    "value": "-c",
+                    "positional": true,
+                    "required": true
+                },
+                "command": {
+                    "name": "Command",
+                    "description": "Command to run",
+                    "type": "STR",
+                    "positional": true,
+                    "required": true
+                }
+            }
+        },
         "Server": {
             "path": "/sbin/init",
             "interactive": true,
             "name": "Server",
-            "description": "Launch a session with all boot services, including SSH.  Connection address and credentials will appear in your web browser once available.",
-            "scale_max": 1,
+            "description": "Launch and ephemeral environment and connect via SSH or graphical browser window. Save any persistent data, code, or prototypes in /data to be able to access again in the future.",            "scale_max": 1,
             "walltime": "03:00:00",
             "parameters": {}
         } 

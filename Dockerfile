@@ -27,6 +27,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     texlive-generic-recommended \
     libxrender1 \
     inkscape \
+    lsof \
+    locate \
+    iputils-ping \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -35,36 +38,46 @@ RUN apt-get update && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip
-RUN pip install numpy scipy
-RUN pip install scikit-learn
-RUN pip install --upgrade scikit-learn
-RUN pip install pillow
-RUN pip install h5py
-RUN pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
-RUN pip install keras
-RUN pip install seaborn
-RUN pip install graphviz
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get -y install build-essential cmake pkg-config
-#RUN apt-get -y install libjpeg62-turbo-dev libtiff5-dev libjasper-dev libpng12-dev
-RUN apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-RUN apt-get -y install libxvidcore-dev libx264-dev
-RUN apt-get -y install libgtk-3-dev
-RUN apt-get -y install libatlas-base-dev gfortran
-#RUN apt-get -y install python2.7-dev python3.5-dev
-RUN apt-get -y install python-opencv
-
-RUN apt-get -y install lsof
-RUN apt-get -y install locate
-
-ENV CACHE_DATE=2017-11-14
-
-RUN apt-get -y install iputils-ping && \
-    apt-get -y install software-properties-common && \
+# Update the repo ...
+RUN apt-get -y install software-properties-common && \
     add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
     apt update -qq 
+
+
+# Add Python2 packages
+RUN pip install --upgrade pip && \
+    pip install numpy scipy scikit-learn pillow h5py seaborn graphviz keras  && \
+    pip install --upgrade scikit-learn
+
+# Add Python3
+RUN apt-get install python-software-properties && \
+  sudo add-apt-repository -y ppa:jonathonf/python-3.6 && \
+  apt-get update && \
+  python -m ipykernel install --user  && \
+  apt-get install -y python3-pip  && \
+  pip3 install --upgrade pip  && \
+  pip3 install ipykernel  && \
+  python3 -m ipykernel install --user && \
+  pip3 install matplotlib scipy numpy pandas h5py pillow keras
+
+
+RUN apt-get update && \
+    apt-get -y upgrade && \
+    apt-get -y install build-essential cmake pkg-config
+#RUN apt-get -y install libjpeg62-turbo-dev libtiff5-dev libjasper-dev libpng12-dev
+
+RUN apt-get -y install libavcodec-dev \
+  libavformat-dev \
+  libswscale-dev 
+  libv4l-dev 
+  libxvidcore-dev 
+  libx264-dev 
+  libgtk-3-dev 
+  libatlas-base-dev \
+  gfortran \
+  python-opencv
+
+#RUN apt-get -y install python2.7-dev python3.5-dev
 
 
 COPY bootstrap.sh /root
@@ -88,26 +101,10 @@ ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
 # Re-organize once complete
 
 # Add New packages for Tensorflow 1.2 to support coursera
-# Add Python3
-RUN apt-get install software-properties-common python-software-properties
-RUN sudo add-apt-repository -y ppa:jonathonf/python-3.6
-RUN apt-get update
-RUN python -m ipykernel install --user 
-RUN apt-get install -y python3-pip 
-RUN  pip3 install --upgrade pip 
-RUN  pip3 install ipykernel 
-RUN  python3 -m ipykernel install --user
-RUN  pip3 install matplotlib
-RUN  pip3 install scipy numpy pandas h5py pillow keras
 
 
 # Add PowerAI Vision
 
-
-
-
-
-USER root
 
 #
 #WORKDIR /tmp

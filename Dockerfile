@@ -50,7 +50,7 @@ RUN pip install --upgrade pip && \
     pip install --upgrade scikit-learn
 
 # Add Python3
-RUN apt-get install python-software-properties && \
+RUN apt-get install -y python-software-properties && \
   sudo add-apt-repository -y ppa:jonathonf/python-3.6 && \
   apt-get update && \
   python -m ipykernel install --user  && \

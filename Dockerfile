@@ -85,6 +85,28 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-8-jdk
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el
 ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
 
+# Re-organize once complete
+
+# Add New packages for Tensorflow 1.2 to support coursera
+# Add Python3
+RUN apt-get install software-properties-common python-software-properties
+RUN sudo add-apt-repository -y ppa:jonathonf/python-3.6
+RUN apt-get update
+RUN python -m ipykernel install --user 
+RUN apt-get install -y python3-pip 
+RUN  pip3 install --upgrade pip 
+RUN  pip3 install ipykernel 
+RUN  python3 -m ipykernel install --user
+RUN  pip3 install matplotlib
+RUN  pip3 install scipy numpy pandas h5py pillow keras
+
+
+# Add PowerAI Vision
+
+
+
+
+
 USER root
 
 #

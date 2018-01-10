@@ -43,6 +43,17 @@ RUN apt-get update && apt-get -y install software-properties-common && \
     add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
     apt update -qq 
 
+# This needs to be run prior to scipy
+RUN apt-get -y install libavcodec-dev \
+  libavformat-dev \
+  libswscale-dev 
+  libv4l-dev 
+  libxvidcore-dev 
+  libx264-dev 
+  libgtk-3-dev 
+  libatlas-base-dev \
+  gfortran \
+  python-opencv
 
 # Add Python2 packages
 RUN pip install --upgrade pip && \
@@ -58,24 +69,15 @@ RUN apt-get install -y python-software-properties && \
   pip3 install --upgrade pip  && \
   pip3 install ipykernel  && \
   python3 -m ipykernel install --user 
-RUN  pip3 install matplotlib numpy scipy pandas h5py pillow keras
-
+RUN  pip3 install matplotlib numpy  pandas h5py pillow keras
+RUN pip3 install scipy
 
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install build-essential cmake pkg-config
 #RUN apt-get -y install libjpeg62-turbo-dev libtiff5-dev libjasper-dev libpng12-dev
 
-RUN apt-get -y install libavcodec-dev \
-  libavformat-dev \
-  libswscale-dev 
-  libv4l-dev 
-  libxvidcore-dev 
-  libx264-dev 
-  libgtk-3-dev 
-  libatlas-base-dev \
-  gfortran \
-  python-opencv
+
 
 #RUN apt-get -y install python2.7-dev python3.5-dev
 

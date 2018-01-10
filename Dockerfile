@@ -39,7 +39,7 @@ RUN apt-get update && \
         rm -rf /var/lib/apt/lists/*
 
 # Update the repo ...
-RUN apt-get -y install software-properties-common && \
+RUN apt-get update && apt-get -y install software-properties-common && \
     add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
     apt update -qq 
 

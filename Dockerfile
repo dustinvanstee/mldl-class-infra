@@ -57,8 +57,8 @@ RUN apt-get install -y python-software-properties && \
   apt-get install -y python3-pip  && \
   pip3 install --upgrade pip  && \
   pip3 install ipykernel  && \
-  python3 -m ipykernel install --user && \
-  pip3 install matplotlib scipy numpy pandas h5py pillow keras
+  python3 -m ipykernel install --user 
+RUN  pip3 install matplotlib numpy scipy pandas h5py pillow keras
 
 
 RUN apt-get update && \

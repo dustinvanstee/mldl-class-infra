@@ -46,11 +46,11 @@ RUN apt-get update && apt-get -y install software-properties-common && \
 # This needs to be run prior to scipy
 RUN apt-get -y install libavcodec-dev \
   libavformat-dev \
-  libswscale-dev 
-  libv4l-dev 
-  libxvidcore-dev 
-  libx264-dev 
-  libgtk-3-dev 
+  libswscale-dev \
+  libv4l-dev \
+  libxvidcore-dev \ 
+  libx264-dev \
+  libgtk-3-dev \
   libatlas-base-dev \
   gfortran \
   python-opencv

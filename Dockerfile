@@ -21,7 +21,7 @@ ENV POWERAI_LINK https://public.dhe.ibm.com/software/server/POWER/Linux/mldl/ubu
 RUN curl -O "$POWERAI_LINK" && dpkg --install mldl*.deb && rm -f mldl*.deb
 
 # install packages
-RUN apt-get update && apt-get -y upgrade && apt-get -y install power-mldl numactl && apt-get clean
+RUN apt-get update && apt-get -y install power-mldl numactl && apt-get clean
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 COPY powerai_help.desktop /etc/skel/Desktop/powerai_help.desktop
@@ -29,51 +29,44 @@ RUN chmod 555 /etc/skel/Desktop/powerai_help.desktop
 RUN echo '\n*** Press Q to exit help.\n' >>/etc/powerai_help.txt
 
 
-#     # Run All the apt stuff first ....
+# Run All the apt stuff first ....
+
+
+
+# Install packages
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    apt-utils \
+    supervisor \
+    git \
+    vim \
+    jed \
+    emacs \
+    build-essential \
+    python-dev \
+    unzip \
+    libsm6 \
+    pandoc \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    texlive-fonts-recommended \
+    texlive-generic-recommended \
+    libxrender1 \
+    inkscape \
+    lsof \
+    locate \
+    iputils-ping \
+    libav-tools \
+    software-properties-common \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
 #     
-#     
-#     #add Jupyter
-#     RUN pip install ipython==5.0 notebook==5.0 pyyaml
-#     #RUN pip install notebook pyyaml
-#     
-#     RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
-#     #add startupscripts
-#     RUN apt-get install -y supervisor
-#     RUN apt-get install -y git
-#     
-#     # Install packages
-#     RUN apt-get update && apt-get install -yq --no-install-recommends \
-#         vim \
-#         jed \
-#         emacs \
-#         build-essential \
-#         python-dev \
-#         unzip \
-#         libsm6 \
-#         pandoc \
-#         texlive-latex-base \
-#         texlive-latex-extra \
-#         texlive-fonts-extra \
-#         texlive-fonts-recommended \
-#         texlive-generic-recommended \
-#         libxrender1 \
-#         inkscape \
-#         lsof \
-#         locate \
-#         iputils-ping \
-#         && apt-get clean && \
-#         rm -rf /var/lib/apt/lists/*
-#     
-#     RUN apt-get update && \
-#             apt-get install -y --no-install-recommends libav-tools && \
-#             apt-get clean && \
-#             rm -rf /var/lib/apt/lists/*
-#     
-#     # Update the repo ...
-#     RUN apt-get update && apt-get -y install software-properties-common && \
-#         add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
-#         apt update -qq 
-#     
+# Update the repo ...
+RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
+    apt update -qq 
+
+
 #     # This needs to be run prior to scipy
 #     RUN apt-get -y install libavcodec-dev \
 #       libavformat-dev \
@@ -85,6 +78,13 @@ RUN echo '\n*** Press Q to exit help.\n' >>/etc/powerai_help.txt
 #       libatlas-base-dev \
 #       gfortran \
 #       python-opencv
+
+#     #add Jupyter
+#     RUN pip install ipython==5.0 notebook==5.0 pyyaml
+#     #RUN pip install notebook pyyaml
+#     
+
+
 #     
 #     # Add Python2 packages
 #     RUN pip install --upgrade pip && \

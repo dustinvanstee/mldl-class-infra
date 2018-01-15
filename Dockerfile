@@ -89,27 +89,28 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
 
 #     #add Jupyter Virtual Envs
 
+# Add Python2 packages
 RUN pip install virtualenv && \
   pip install --upgrade pip && \
-  virtualenv -p /usr/bin/python2.7 /tmp/p2 && \
-  . /tmp/p2/bin/activate && \
-  pip install tornado && \
+  virtualenv -p /usr/bin/python2.7 /root/python2_env && \
+  . /root/python2_env/bin/activate && \
+  pip install tornado \
+    ipython==5.0  \
+    notebook==5.0  \
+    pyyaml \
+    numpy \
+    scipy \
+    scikit-learn \
+    pillow \
+    h5py \
+    seaborn \
+    graphviz \
+    ipykernel \
+  && \
   deactivate
 
+# user ...
 
-
-
-
-#     RUN pip install ipython==5.0 notebook==5.0 pyyaml
-#     #RUN pip install notebook pyyaml
-#     
-
-
-#     
-#     # Add Python2 packages
-#     RUN pip install --upgrade pip && \
-#         pip install numpy scipy scikit-learn pillow h5py seaborn graphviz keras  && \
-#         pip install --upgrade scikit-learn
 #     
 #     # Add Python3
 #     RUN a

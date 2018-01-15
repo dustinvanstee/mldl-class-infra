@@ -113,11 +113,7 @@ RUN pip install virtualenv && \
 # Add Python3
 RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
   . /root/python3_env/bin/activate && \
-  pip install tornado \
-    ipython==5.0  \
-    notebook==5.0  \
-    pyyaml \
-    numpy \
+  pip install numpy \
     pillow \
     h5py \
     seaborn \

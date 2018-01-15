@@ -92,7 +92,7 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
 RUN pip install virtualenv && \
   pip install --upgrade pip && \
   virtualenv -p /usr/bin/python2.7 /tmp/p2 && \
-  source /tmp/p2/bin/activate && \
+  bash source /tmp/p2/bin/activate && \
   pip install tornado && \
   deactivate
 

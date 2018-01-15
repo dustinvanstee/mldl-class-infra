@@ -64,20 +64,28 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 #     
 # Update the repo ...
 RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
-    apt update -qq 
-
-
-#     # This needs to be run prior to scipy
-#     RUN apt-get -y install libavcodec-dev \
-#       libavformat-dev \
-#       libswscale-dev \
-#       libv4l-dev \
-#       libxvidcore-dev \ 
-#       libx264-dev \
-#       libgtk-3-dev \
-#       libatlas-base-dev \
-#       gfortran \
-#       python-opencv
+    add-apt-repository -y ppa:jonathonf/python-3.6 && \
+    apt update -qq && \
+    apt-get install -yq --no-install-recommends \
+        libavcodec-dev \
+        libavformat-dev \
+        libswscale-dev \
+        libv4l-dev \
+        libxvidcore-dev \ 
+        libx264-dev \
+        libgtk-3-dev \
+        libatlas-base-dev \
+        gfortran \
+        cmake \ 
+        libgtk2.0-dev \
+        pkg-config \
+        python-dev \ 
+        libtbb2 \
+        libtbb-dev \
+        python-software-properties \
+        python3-pip \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 #     #add Jupyter
 #     RUN pip install ipython==5.0 notebook==5.0 pyyaml
@@ -92,11 +100,8 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
 #         pip install --upgrade scikit-learn
 #     
 #     # Add Python3
-#     RUN apt-get install -y python-software-properties && \
-#       sudo add-apt-repository -y ppa:jonathonf/python-3.6 && \
-#       apt-get update && \
+#     RUN a
 #       python -m ipykernel install --user  && \
-#       apt-get install -y python3-pip  && \
 #       pip3 install --upgrade pip  && \
 #       pip3 install ipykernel  && \
 #       python3 -m ipykernel install --user 
@@ -104,14 +109,9 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
 #     RUN pip3 install scipy
 #     RUN pip3 install keras
 #     
-#     RUN apt-get update && \
-#         apt-get -y upgrade && \
-#         apt-get -y install build-essential cmake pkg-config
-#     #RUN apt-get -y install libjpeg62-turbo-dev libtiff5-dev libjasper-dev libpng12-dev
 #     
 #     
 #     
-#     #RUN apt-get -y install python2.7-dev python3.5-dev
 #     
 #     
 #     COPY bootstrap.sh /root

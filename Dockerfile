@@ -113,7 +113,7 @@ RUN pip install virtualenv && \
 # Add Python3
 RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
   . /root/python3_env/bin/activate && \
-  pip install numpy \
+  pip3 install numpy \
   && \
   deactivate
 

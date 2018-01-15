@@ -87,7 +87,19 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-#     #add Jupyter
+#     #add Jupyter Virtual Envs
+
+RUN pip install virtualenv && \
+  pip install --upgrade pip && \
+  virtualenv -p /usr/bin/python2.7 /tmp/p2 && \
+  source /tmp/p2/bin/activate && \
+  pip install tornado && \
+  deactivate
+
+
+
+
+
 #     RUN pip install ipython==5.0 notebook==5.0 pyyaml
 #     #RUN pip install notebook pyyaml
 #     

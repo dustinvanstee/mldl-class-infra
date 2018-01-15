@@ -22,11 +22,11 @@ RUN curl -O "$POWERAI_LINK" && dpkg --install mldl*.deb && rm -f mldl*.deb
 
 # install packages
 RUN apt-get update && apt-get -y install power-mldl numactl && apt-get clean
-COPY motd /etc/motd
-COPY motd /etc/powerai_help.txt
-COPY powerai_help.desktop /etc/skel/Desktop/powerai_help.desktop
-RUN chmod 555 /etc/skel/Desktop/powerai_help.desktop
-RUN echo '\n*** Press Q to exit help.\n' >>/etc/powerai_help.txt
+# COPY motd /etc/motd
+# COPY motd /etc/powerai_help.txt
+# COPY powerai_help.desktop /etc/skel/Desktop/powerai_help.desktop
+# RUN chmod 555 /etc/skel/Desktop/powerai_help.desktop
+# RUN echo '\n*** Press Q to exit help.\n' >>/etc/powerai_help.txt
 
 
 # Run All the apt stuff first ....

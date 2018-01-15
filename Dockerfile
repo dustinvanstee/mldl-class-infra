@@ -114,16 +114,16 @@ RUN pip install virtualenv && \
 RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
   . /root/python3_env/bin/activate && \
   pip install numpy \
-    pillow \
-    h5py \
-    seaborn \
-    graphviz \
-    ipykernel \
-    scipy \
-    scikit-learn \
   && \
   deactivate
 
+#    pillow \
+#    h5py \
+#    seaborn \
+#    graphviz \
+#    ipykernel \
+#    scipy \
+#    scikit-learn \
 
 # Add MLDL Frameworks
 

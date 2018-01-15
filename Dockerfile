@@ -109,10 +109,30 @@ RUN pip install virtualenv && \
   && \
   deactivate
 
-# user ...
-
 #     
-#     # Add Python3
+# Add Python3
+RUN pip install virtualenv && \
+  pip install --upgrade pip && \
+  virtualenv -p /usr/bin/python3 /root/python3_env && \
+  . /root/python3_env/bin/activate && \
+  pip install tornado \
+    ipython==5.0  \
+    notebook==5.0  \
+    pyyaml \
+    numpy \
+    pillow \
+    h5py \
+    seaborn \
+    graphviz \
+    ipykernel \
+    scipy \
+    scikit-learn \
+  && \
+  deactivate
+
+
+# Add MLDL Frameworks
+
 #     RUN a
 #       python -m ipykernel install --user  && \
 #       pip3 install --upgrade pip  && \

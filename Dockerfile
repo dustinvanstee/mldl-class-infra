@@ -111,9 +111,7 @@ RUN pip install virtualenv && \
 
 #     
 # Add Python3
-RUN pip install virtualenv && \
-  pip install --upgrade pip && \
-  virtualenv -p /usr/bin/python3 /root/python3_env && \
+RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
   . /root/python3_env/bin/activate && \
   pip install tornado \
     ipython==5.0  \

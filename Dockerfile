@@ -88,6 +88,24 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
     rm -rf /var/lib/apt/lists/*
 
 #     #add Jupyter Virtual Envs
+RUN apt-update && \
+    apt-get install -yq --no-install-recommends \
+        python3-dev 
+
+# Add Python3
+RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
+  . /root/python3_env/bin/activate && \
+  pip install numpy \
+    scipy \
+    scikit-learn \
+    pillow \
+    h5py \
+    seaborn \
+    graphviz \
+    ipykernel \
+  && \
+  deactivate
+
 
 # Add Python2 packages
 RUN pip install virtualenv && \
@@ -110,12 +128,7 @@ RUN pip install virtualenv && \
   deactivate
 
 #     
-# Add Python3
-RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
-  . /root/python3_env/bin/activate && \
-  pip3 install numpy \
-  && \
-  deactivate
+
 
 #    pillow \
 #    h5py \

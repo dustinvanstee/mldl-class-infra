@@ -93,7 +93,9 @@ RUN apt update && \
         python3-dev 
 
 # Add Python3
-RUN virtualenv -p /usr/bin/python3 /root/python3_env && \
+RUN  pip install virtualenv && \
+  pip install --upgrade pip && \
+  virtualenv -p /usr/bin/python3 /root/python3_env && \
   . /root/python3_env/bin/activate && \
   pip install numpy \
     scipy \

@@ -130,63 +130,31 @@ RUN pip install virtualenv && \
   deactivate
 
 #     
+COPY bootstrap.sh /root
+COPY wrap_sbin_init.sh /root
+
+# for Nimbix, USER nimbix, for now use root
+USER root
+RUN mkdir -p /data2 && chown nimbix:nimbix /data2 && cd /data2 && \
+  git clone https://github.com/dustinvanstee/mldl-101.git && \
+  git clone https://github.com/dustinvanstee/nba-rt-prediction.git && \
+  wget http://apache.claz.org/spark/spark-2.1.2/spark-2.1.2-bin-hadoop2.7.tgz && \
+  tar -zxvf spark-2.1.2-bin-hadoop2.7.tgz
+
+# wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
+# tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz && \
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-8-jdk
+
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el
+ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
 
 
-#    pillow \
-#    h5py \
-#    seaborn \
-#    graphviz \
-#    ipykernel \
-#    scipy \
-#    scikit-learn \
+# Add Custom MLDL Frameworks
+#     
+#     
+ 
 
-# Add MLDL Frameworks
-
-#     RUN a
-#       python -m ipykernel install --user  && \
-#       pip3 install --upgrade pip  && \
-#       pip3 install ipykernel  && \
-#       python3 -m ipykernel install --user 
-#     RUN pip3 install matplotlib numpy  pandas h5py pillow
-#     RUN pip3 install scipy
-#     RUN pip3 install keras
-#     
-#     
-#     
-#     
-#     
-#     
-#     COPY bootstrap.sh /root
-#     COPY wrap_sbin_init.sh /root
-#     
-#     # for Nimbix, USER nimbix, for now use root
-#     USER root
-#     RUN mkdir -p /data2 && chown nimbix:nimbix /data2 && cd /data2 && \
-#       git clone https://github.com/dustinvanstee/mldl-101.git && \
-#       git clone https://github.com/dustinvanstee/nba-rt-prediction.git && \
-#       wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
-#       wget http://apache.claz.org/spark/spark-2.1.2/spark-2.1.2-bin-hadoop2.7.tgz && \
-#       tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz && \
-#       tar -zxvf spark-2.1.2-bin-hadoop2.7.tgz
-#     
-#     RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-8-jdk
-#     
-#     ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el
-#     ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
-#     
-#     # Re-organize once complete
-#     
-#     # Add New packages for Tensorflow 1.2 to support coursera
-#     
-#     
-#     # Add PowerAI Vision
-#     
-#     
-#     #
-#     #WORKDIR /tmp
-#     #RUN git clone https://github.com/dustinvanstee/mldl-101.git 
-#     #ADD https://github.com/dustinvanstee/mldl-class-infra/raw/master/bootstrap.sh  /tmp/bootstrap.sh
-#     #RUN bash /tmp/bootstrap.sh
 
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json

@@ -63,6 +63,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     
 #     
 # Update the repo ...
+# A lot of these libs are for opencv ...
 RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
     add-apt-repository -y ppa:jonathonf/python-3.6 && \
     apt update -qq && \
@@ -75,6 +76,8 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
         libx264-dev \
         libgtk-3-dev \
         libatlas-base-dev \
+        libjpeg-dev \
+        libdc1394-22-dev \
         gfortran \
         cmake \ 
         libgtk2.0-dev \
@@ -128,6 +131,50 @@ RUN pip install virtualenv && \
     ipykernel \
   && \
   deactivate
+
+
+# Build and Install opencv ~ long road ..
+WORKDIR /root
+
+RUN . /root/python3_env/bin/activate && \
+  cd /root && \
+  wget -O opencv.zip         https://github.com/opencv/opencv/archive/3.3.0.zip  && \
+  wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip  && \
+  unzip opencv.zip  && \
+  unzip opencv_contrib.zip && \
+  cd /root/opencv-3.3.0/ && \
+  mkdir /root/opencv-3.3.0/build  && \
+  cd /root/opencv-3.3.0/build && \
+  sudo cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D INSTALL_C_EXAMPLES=OFF \
+      -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib-3.3.0/modules \
+      -D WITH_CUDA=OFF \
+      -D PYTHON3_EXECUTABLE=/root/python3_env/bin/python3 \
+      -D WITH_QT=OFF \
+      -D WITH_OPENGL=OFF \
+      -D FORCE_VTK=OFF \
+      -D WITH_TBB=OFF \
+      -D WITH_GDAL=OFF \
+      -D WITH_XINE=OFF \
+      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/python3_env/lib/python3.5/site-packages/numpy/core/include/ \
+      -D PYTHON3_NUMPY_VERSION=1.14.0 \
+      -D BUILD_EXAMPLES=ON ..  && \
+
+  make -j10  && \
+  sudo make install  && \
+  sudo ldconfig && \
+  ln -s /usr/local/lib/python3.5/dist-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/python3_env/lib/python3.5/site-packages/cv2.so  && \
+  deactivate
+
+
+
+
+
+
+
+
 
 #     
 COPY bootstrap.sh /root

@@ -188,13 +188,13 @@ ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
 #    
 WORKDIR /data2 
 COPY binaries/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  /data2/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl
-#  RUN . /root/python3_env/bin/activate && \
-#    pip install /data2/tensorflow-1.2/tensorflow_pkg/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
-#    git clone https://github.com/keras-team/keras.git  && \
-#    cd /data2/keras  && \
-#    git checkout tags/2.0.7 -b origin/master  && \
-#    python3 setup.py install  && \
-#    deactivate
+RUN . /root/python3_env/bin/activate && \
+  pip install /data2/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
+  git clone https://github.com/keras-team/keras.git  && \
+  cd /data2/keras  && \
+  git checkout tags/2.0.7 -b origin/master  && \
+  python3 setup.py install  && \
+  deactivate
 
 # Simple utilities
 COPY bootstrap.sh /data2

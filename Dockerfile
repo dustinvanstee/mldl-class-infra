@@ -31,8 +31,6 @@ RUN apt-get update && apt-get -y install power-mldl numactl && apt-get clean
 
 # Run All the apt stuff first ....
 
-
-
 # Install packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     apt-utils \
@@ -165,20 +163,10 @@ RUN . /root/python3_env/bin/activate && \
   make -j10  && \
   sudo make install  && \
   sudo ldconfig && \
-  ln -s /usr/local/lib/python3.5/dist-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/python3_env/lib/python3.5/site-packages/cv2.so  && \
+  ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/python3_env/lib/python3.5/site-packages/cv2.so  && \
+  rm -rf /root/opencv* && \
   deactivate
 
-
-
-
-
-
-
-
-
-#     
-COPY bootstrap.sh /root
-COPY wrap_sbin_init.sh /root
 
 # for Nimbix, USER nimbix, for now use root
 USER root
@@ -196,11 +184,24 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-8-jdk
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el
 ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
 
-
 # Add Custom MLDL Frameworks
-#     
-#     
- 
+#    
+WORKDIR /data2 
+COPY binaries/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  /data2/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl
+RUN . /root/python3_env/bin/activate && \
+  pip install /data2/tensorflow-1.2/tensorflow_pkg/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
+  git clone https://github.com/keras-team/keras.git  && \
+  cd /data2/keras  && \
+  git checkout tags/2.0.7 -b origin/master  && \
+  python3 setup.py install  && \
+  deactivate
+
+# Simple utilities
+COPY bootstrap.sh /data2
+COPY wrap_sbin_init.sh /data2
+COPY motd /etc/motd
+COPY motd /etc/powerai_help.txt
+
 
 
 #add NIMBIX application

@@ -106,7 +106,7 @@ RUN  pip install virtualenv && \
     seaborn \
     graphviz \
     ipykernel \
-  && pip install  --force-reinstall jupyter\
+  && pip install  --force-reinstall jupyter &&\
   deactivate
 
 

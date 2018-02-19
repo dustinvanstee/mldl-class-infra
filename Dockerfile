@@ -203,7 +203,7 @@ RUN chown  nimbix:nimbix /root/  && \
  chown -R nimbix:nimbix /root/python2_env  && \
  chown -R nimbix:nimbix /root/python3_env
 
-# Simple utilities
+# Simple utilities(cmt)
 COPY bootstrap.sh /data2
 COPY wrap_sbin_init.sh /data2
 COPY motd /etc/motd

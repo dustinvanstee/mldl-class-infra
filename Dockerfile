@@ -106,7 +106,6 @@ RUN  pip install virtualenv && \
     seaborn \
     graphviz \
     ipykernel \
-    brunel \
   && pip install  --force-reinstall jupyter &&\
   deactivate
 
@@ -128,7 +127,6 @@ RUN pip install virtualenv && \
     seaborn \
     graphviz \
     ipykernel \
-    brunel \
   && \
   deactivate
 
@@ -209,6 +207,8 @@ COPY wrap_sbin_init.sh /data2
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 
+# Open Items
+# 1. Brunel Install
 
 
 #add NIMBIX application

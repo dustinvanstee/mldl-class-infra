@@ -106,6 +106,7 @@ RUN  pip install virtualenv && \
     seaborn \
     graphviz \
     ipykernel \
+    brunel \
   && pip install  --force-reinstall jupyter &&\
   deactivate
 
@@ -127,6 +128,7 @@ RUN pip install virtualenv && \
     seaborn \
     graphviz \
     ipykernel \
+    brunel \
   && \
   deactivate
 
@@ -195,6 +197,11 @@ RUN . /root/python3_env/bin/activate && \
   git checkout tags/2.0.7 -b origin/master  && \
   python3 setup.py install  && \
   deactivate
+
+# Permissions patching
+RUN chown  nimbix:nimbix /root/  && \
+ chown -R nimbix:nimbix /root/python2_env  && \
+ chown -R nimbix:nimbix /root/python3_env
 
 # Simple utilities
 COPY bootstrap.sh /data2

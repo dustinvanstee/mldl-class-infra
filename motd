@@ -24,3 +24,12 @@ directory - e.g. one of the following:
 
 Please be sure to save any persistent code or data in the /data directory!
 
+
+############ Class Instructions ##########################
+
+To run jupyter notebooks, run the following commands :
+
+source /root/python2_env/bin/activate
+~/mldl-101/startClass2.sh -g 1
+
+Then point your browser to hostname:5050 and get started

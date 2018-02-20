@@ -170,9 +170,8 @@ RUN . /root/python3_env/bin/activate && \
 
 # for Nimbix, USER nimbix, for now use root
 USER root
-RUN mkdir -p /data2 && chown nimbix:nimbix /data2 && cd /data2 && \
+RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
-  git clone https://github.com/dustinvanstee/nba-rt-prediction.git && \
   wget http://apache.claz.org/spark/spark-2.1.2/spark-2.1.2-bin-hadoop2.7.tgz && \
   tar -zxvf spark-2.1.2-bin-hadoop2.7.tgz
 
@@ -182,16 +181,16 @@ RUN mkdir -p /data2 && chown nimbix:nimbix /data2 && cd /data2 && \
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-8-jdk
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el
-ENV SPARK_HOME=/data2/spark-2.1.2-bin-hadoop2.7
+ENV SPARK_HOME=/dl-labs/spark-2.1.2-bin-hadoop2.7
 
 # Add Custom MLDL Frameworks
 #    
-WORKDIR /data2 
-COPY binaries/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  /data2/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl
+WORKDIR /dl-labs 
+COPY binaries/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  /dl-labs/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl
 RUN . /root/python3_env/bin/activate && \
-  pip install /data2/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
+  pip install /dl-labs/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
   git clone https://github.com/keras-team/keras.git  && \
-  cd /data2/keras  && \
+  cd /dl-labs/keras  && \
   git checkout tags/2.0.7 -b origin/master  && \
   python3 setup.py install  && \
   deactivate
@@ -199,11 +198,10 @@ RUN . /root/python3_env/bin/activate && \
 # Permissions patching
 RUN chown  nimbix:nimbix /root/  && \
  chown -R nimbix:nimbix /root/python2_env  && \
- chown -R nimbix:nimbix /root/python3_env
+ chown -R nimbix:nimbix /root/python3_env && \
+ chown -R nimbix:nimbix /dl-labs
 
 # Simple utilities(cmt)
-COPY bootstrap.sh /data2
-COPY wrap_sbin_init.sh /data2
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 

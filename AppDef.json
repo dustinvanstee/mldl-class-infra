@@ -1,6 +1,6 @@
 {
     "name": "mldl_education",
-    "description": "Access Jupyter Notebooks from port 5050 after running sudo /root/bootstrap.sh from terminal. SSH into instance with user id: nimbix@<fqdn> and password from.  The container runs for a max of 3 hours",
+    "description": "SSH into instance with user id: nimbix@<fqdn> and password.  Jupyter instructions posted at login.",
     "author": "vanstee@us.ibm.com",
     "licensed": true,
     "classifications": [
@@ -8,7 +8,7 @@
         "IBM POWER/Deep Learning"
     ],
     "machines": [
-        "np8c0",
+        "np8c*",
         "np8g1",
         "np8g2"
     ],

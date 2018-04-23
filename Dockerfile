@@ -1,8 +1,7 @@
 #!/bin/bash
+FROM nvidia/cuda-ppc64le:8.0-cudnn6-devel-ubuntu16.04 
+LABEL version="1.1"
 
-LABEL version="1.0"
-FROM nvidia/cuda-ppc64le:8.0-cudnn6-devel-ubuntu16.04
- 
 RUN apt-get -y update && \
     apt-get -y install curl && \
     curl -H 'Cache-Control: no-cache' \
@@ -98,8 +97,8 @@ RUN apt update && \
 # Add Python3
 RUN  pip install virtualenv && \
   pip install --upgrade pip && \
-  virtualenv -p /usr/bin/python3 /root/python3_env && \
-  . /root/python3_env/bin/activate && \
+  virtualenv -p /usr/bin/python3 /root/yololab_env && \
+  . /root/yololab_env/bin/activate && \
   pip install numpy \
     scipy \
     scikit-learn \
@@ -132,7 +131,7 @@ RUN pip install virtualenv && \
 # Build and Install opencv ~ long road ..
 WORKDIR /root
 
-RUN . /root/python3_env/bin/activate && \
+RUN . /root/yololab_env/bin/activate && \
   cd /root && \
   wget -O opencv.zip         https://github.com/opencv/opencv/archive/3.3.0.zip  && \
   wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip  && \
@@ -147,21 +146,21 @@ RUN . /root/python3_env/bin/activate && \
       -D INSTALL_C_EXAMPLES=OFF \
       -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib-3.3.0/modules \
       -D WITH_CUDA=OFF \
-      -D PYTHON3_EXECUTABLE=/root/python3_env/bin/python3 \
+      -D PYTHON3_EXECUTABLE=/root/yololab_env/bin/python3 \
       -D WITH_QT=OFF \
       -D WITH_OPENGL=OFF \
       -D FORCE_VTK=OFF \
       -D WITH_TBB=OFF \
       -D WITH_GDAL=OFF \
       -D WITH_XINE=OFF \
-      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/python3_env/lib/python3.5/site-packages/numpy/core/include/ \
+      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/yololab_env/lib/python3.5/site-packages/numpy/core/include/ \
       -D PYTHON3_NUMPY_VERSION=1.14.0 \
       -D BUILD_EXAMPLES=ON ..  && \
 
   make -j10  && \
   sudo make install  && \
   sudo ldconfig && \
-  ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/python3_env/lib/python3.5/site-packages/cv2.so  && \
+  ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/yololab_env/lib/python3.5/site-packages/cv2.so  && \
   rm -rf /root/opencv* && \
   deactivate
 
@@ -186,7 +185,7 @@ ENV SPARK_HOME=/dl-labs/spark-2.1.2-bin-hadoop2.7
 #    
 WORKDIR /dl-labs 
 COPY binaries/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  /dl-labs/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl
-RUN . /root/python3_env/bin/activate && \
+RUN . /root/yololab_env/bin/activate && \
   pip install /dl-labs/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
   git clone https://github.com/keras-team/keras.git  && \
   cd /dl-labs/keras  && \
@@ -197,7 +196,7 @@ RUN . /root/python3_env/bin/activate && \
 # Permissions patching
 RUN chown  nimbix:nimbix /root/  && \
  chown -R nimbix:nimbix /root/python2_env  && \
- chown -R nimbix:nimbix /root/python3_env && \
+ chown -R nimbix:nimbix /root/yololab_env && \
  chown -R nimbix:nimbix /dl-labs
 
 # Simple utilities(cmt)

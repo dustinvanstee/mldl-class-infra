@@ -206,8 +206,16 @@ COPY motd /etc/powerai_help.txt
 
 # Open Items
 # 1. Brunel Install
+# 2. seaborn/graphviz
 
-
+# Autostart Jupyter
+RUN mkdir -p /home/nimbix/.jupyter
+COPY conf.d/jupyter_notebook_conf.json /home/nimbix/.jupyter/
+COPY conf.d/jupyter_notebook_conf.py /home/nimbix/.jupyter/
+COPY startjupyter.sh /home/nimbix
+RUN chown -R nimbix:nimbix /home/nimbix/
+RUN startjupyter.sh
+ 
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate

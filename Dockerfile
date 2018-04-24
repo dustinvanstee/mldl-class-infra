@@ -208,12 +208,12 @@ COPY motd /etc/powerai_help.txt
 # 2. seaborn/graphviz
 
 # Autostart Jupyter
-RUN mkdir -p /home/nimbix/.jupyter
-COPY conf.d/jupyter_notebook_config.json /home/nimbix/.jupyter/
-COPY conf.d/jupyter_notebook_config.py /home/nimbix/.jupyter/
-COPY startjupyter.sh /home/nimbix
-RUN chown -R nimbix:nimbix /home/nimbix/
-RUN /home/nimbix/startjupyter.sh
+RUN mkdir -p /dl-labs/.jupyter
+COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
+COPY conf.d/jupyter_notebook_config.py /dl-labs/.jupyter/
+COPY startjupyter.sh /dl-labs
+RUN chown -R nimbix:nimbix /dl-labs
+RUN /dl-labs/startjupyter.sh
  
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json

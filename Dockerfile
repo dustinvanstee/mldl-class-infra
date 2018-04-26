@@ -196,8 +196,7 @@ RUN . /root/yololab_env/bin/activate && \
 # Permissions patching
 RUN chown  nimbix:nimbix /root/  && \
  chown -R nimbix:nimbix /root/python2_env  && \
- chown -R nimbix:nimbix /root/yololab_env && \
- chown -R nimbix:nimbix /dl-labs
+ chown -R nimbix:nimbix /root/yololab_env 
 
 # Simple utilities(cmt)
 COPY motd /etc/motd
@@ -213,7 +212,6 @@ COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
 COPY conf.d/jupyter_notebook_config.py /dl-labs/.jupyter/
 COPY startjupyter.sh /dl-labs
 RUN chown -R nimbix:nimbix /dl-labs
-RUN /dl-labs/startjupyter.sh
  
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json

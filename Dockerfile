@@ -207,12 +207,21 @@ COPY motd /etc/powerai_help.txt
 # 2. seaborn/graphviz
 
 # Autostart Jupyter
-RUN mkdir -p /dl-labs/.jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
 COPY conf.d/jupyter_notebook_config.py /dl-labs/.jupyter/
 COPY startjupyter.sh /dl-labs
 RUN chown -R nimbix:nimbix /dl-labs
- 
+
+#add startupscripts
+RUN apt-get install -y supervisor
+WORKDIR /dl-labs
+COPY startjupyter.sh /dl-labs 
+# ADD startdigits.sh  /root/
+#ADD starttensorboard.sh /root/ 
+COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
+COPY rc.local /etc/rc.local
+
+
 #add NIMBIX application
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate

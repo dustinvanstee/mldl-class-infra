@@ -1,6 +1,4 @@
-#!/bin/bash
 FROM nvidia/cuda-ppc64le:8.0-cudnn6-devel-ubuntu16.04 
-LABEL version="1.1"
 
 RUN apt-get -y update && \
     apt-get -y install curl && \

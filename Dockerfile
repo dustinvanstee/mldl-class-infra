@@ -189,12 +189,11 @@ RUN . /root/yololab_env/bin/activate && \
   cd /dl-labs/keras  && \
   git checkout tags/2.0.7 -b origin/master  && \
   python3 setup.py install  && \
-  deactivate
-
+  deactivate && \
 # Permissions patching
-RUN chown  nimbix:nimbix /root/  && \
- chown -R nimbix:nimbix /root/python2_env  && \
- chown -R nimbix:nimbix /root/yololab_env 
+  chown  nimbix:nimbix /root/  && \
+  chown -R nimbix:nimbix /root/python2_env  && \
+  chown -R nimbix:nimbix /root/yololab_env 
 
 # Simple utilities(cmt)
 COPY motd /etc/motd
@@ -207,11 +206,10 @@ COPY motd /etc/powerai_help.txt
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
 COPY conf.d/jupyter_notebook_config.py /dl-labs/.jupyter/
+LABEL a="a3"
 COPY startjupyter.sh /dl-labs
-RUN chown -R nimbix:nimbix /dl-labs
 
 #add startupscripts
-RUN apt-get install -y supervisor
 WORKDIR /dl-labs
 COPY startjupyter.sh /dl-labs 
 # ADD startdigits.sh  /root/

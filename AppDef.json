@@ -8,9 +8,10 @@
         "IBM POWER/Deep Learning"
     ],
     "machines": [
-        "np8c*",
+        "np8c0",
+        "np8c1",
         "np8g1",
-        "np8g2"
+        "np8gk1"
     ],
     "vault-types": [
         "FILE",
@@ -54,18 +55,11 @@
             "path": "/sbin/init",
             "interactive": true,
             "name": "Server",
-            "description": "Launch and ephemeral environment and connect via SSH or graphical browser window. Save any persistent data, code, or prototypes in /data to be able to access again in the future.",            "scale_max": 1,
+            "description": "Launch and ephemeral environment and connect via SSH or graphical browser window. Save any persistent data, code, or prototypes in /data to be able to access again in the future.",            
+            "scale_max": 1,
             "walltime": "01:00:00",
             "parameters": {}
-        },
-        "Jupyter": {
-            "path": "/dl-labs/startjupyter.sh",
-            "interactive": true,
-            "name": "Jupyter",
-            "description": "Launch a Jupyter Notebook on port 5050",            "scale_max": 1,
-            "walltime": "01:00:00",
-            "parameters": {}
-        }  
+        } 
     },
     "image": {
         "type": "image/jpeg",

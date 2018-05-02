@@ -1,5 +1,5 @@
 {
-    "name": "mldl_education",
+    "name": "yolo_mldl_education",
     "description": "SSH into instance with user id: nimbix@<fqdn> and password.  Jupyter instructions posted at login.",
     "author": "vanstee@us.ibm.com",
     "licensed": true,
@@ -57,7 +57,7 @@
             "name": "Server",
             "description": "Launch and ephemeral environment and connect via SSH or graphical browser window. Save any persistent data, code, or prototypes in /data to be able to access again in the future.",            
             "scale_max": 1,
-            "walltime": "01:00:00",
+            "walltime": "01:30:00",
             "parameters": {}
         } 
     },

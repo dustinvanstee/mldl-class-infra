@@ -215,7 +215,9 @@ COPY startjupyter.sh /dl-labs
 # ADD startdigits.sh  /root/
 #ADD starttensorboard.sh /root/ 
 COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
-COPY rc.local /etc/rc.local
+
+# Add this to autostart jupyter in /dl-labs ... disabling for now ....
+# COPY rc.local /etc/rc.local
 
 
 #add NIMBIX application

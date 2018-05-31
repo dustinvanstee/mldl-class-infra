@@ -154,8 +154,6 @@ RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
 # wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
 # tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz && \
 
-openjdk-8-jdk_8u171-b11-0ubuntu0.16.04.1_powerpc
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install openjdk-8-jdk
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-ppc64el

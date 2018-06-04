@@ -175,6 +175,14 @@ RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
   tar -zxvf spark-2.3.0-bin-hadoop2.7.tgz && \
   cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
 
+
+# Additional Fixes to integrate above
+RUN sudo apt-get install python3.6
+
+
+
+
+
 # wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
 # tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz && \
 

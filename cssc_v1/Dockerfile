@@ -177,8 +177,7 @@ RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
 
 
 # Additional Fixes to integrate above
-RUN sudo apt-get install python3.6
-
+RUN sudo apt-get install -y python3.6
 
 
 

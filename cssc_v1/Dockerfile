@@ -103,6 +103,7 @@ RUN  pip install virtualenv && \
     pillow \
     h5py \
     ipykernel \
+    pandas \
   && pip install  --force-reinstall jupyter &&\
   deactivate
 
@@ -171,10 +172,12 @@ WORKDIR /dl-labs
 #  git checkout tags/2.0.7 -b origin/master  && \
 #  python3 setup.py install  && \
 #  deactivate && \
+
 ## Permissions patching
-#  chown  nimbix:nimbix /root/  && \
-#  chown -R nimbix:nimbix /root/python2_env  && \
-#  chown -R nimbix:nimbix /root/cssc_env 
+RUN chown  nimbix:nimbix /root/  && \
+    chown -R nimbix:nimbix /root/cssc_env 
+
+
 
 # Simple utilities(cmt)
 COPY motd /etc/motd

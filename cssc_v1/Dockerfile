@@ -91,16 +91,17 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
     apt update && \
     apt-get install -yq --no-install-recommends python3-dev && \
 
-#
-# cssc_p2 -
-#
+#                     Tensorflow           OpenCV      Pytorch
+# cssc_env27_tf14 -   1.4 [req validate]   xx          xx 
+# cssc_env35_tf12 -   1.2                  3.3.0       xx 
+# cssc_env36_tf18 -   1.8                  xx          xx
 
 
 # Add cssc_p2 Python2 Virtual ENV packages
   pip install virtualenv && \
   pip install --upgrade pip && \
-  virtualenv -p /usr/bin/python2.7 /root/python2_env && \
-  . /root/python2_env/bin/activate && \
+  virtualenv -p /usr/bin/python2.7 /root/cssc_env27_tf14 && \
+  . /root/cssc_env27_tf14/bin/activate && \
   pip install tornado \
     ipython==5.0  \
     notebook==5.0  \
@@ -112,14 +113,25 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
     h5py \
     ipykernel \
   && \
-  deactivate
-
-
-# Add Python3
-RUN  pip install virtualenv && \
+  deactivate && \
+# Add cssc_env35_tf12 Python3 virtual environment
+  pip install virtualenv && \
   pip install --upgrade pip && \
-  virtualenv -p /usr/bin/python3 /root/cssc_env && \
-  . /root/cssc_env/bin/activate && \
+  virtualenv -p /usr/bin/python3 /root/cssc_env35_tf12 && \
+  . /root/cssc_env35_tf12/bin/activate && \
+  pip install numpy \
+    scipy \
+    scikit-learn \
+    pillow \
+    h5py \
+    ipykernel \
+    pandas \
+  && pip install  --force-reinstall jupyter &&\
+  deactivate && \
+# Add cssc_env36_tf18 Python3 virtual environment
+  sudo apt-get install -y python3.6 && \
+  virtualenv -p /usr/bin/python3 /root/cssc_env36_tf18 && \
+  . /root/cssc_env36_tf18/bin/activate && \
   pip install numpy \
     scipy \
     scikit-learn \
@@ -133,7 +145,7 @@ RUN  pip install virtualenv && \
 # Build and Install opencv ~ long road ..
 WORKDIR /root
 
-RUN . /root/cssc_env/bin/activate && \
+RUN . /root/cssc_env35_tf12/bin/activate && \
   cd /root && \
   wget -O opencv.zip         https://github.com/opencv/opencv/archive/3.3.0.zip  && \
   wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip  && \
@@ -148,23 +160,27 @@ RUN . /root/cssc_env/bin/activate && \
       -D INSTALL_C_EXAMPLES=OFF \
       -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib-3.3.0/modules \
       -D WITH_CUDA=OFF \
-      -D PYTHON3_EXECUTABLE=/root/cssc_env/bin/python3 \
+      -D PYTHON3_EXECUTABLE=/root/cssc_env35_tf12/bin/python3 \
       -D WITH_QT=OFF \
       -D WITH_OPENGL=OFF \
       -D FORCE_VTK=OFF \
       -D WITH_TBB=OFF \
       -D WITH_GDAL=OFF \
       -D WITH_XINE=OFF \
-      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/cssc_env/lib/python3.5/site-packages/numpy/core/include/ \
+      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/cssc_env35_tf12/lib/python3.5/site-packages/numpy/core/include/ \
       -D PYTHON3_NUMPY_VERSION=1.14.0 \
       -D BUILD_EXAMPLES=ON ..  && \
 
   make -j10  && \
   sudo make install  && \
   sudo ldconfig && \
-  ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/cssc_env/lib/python3.5/site-packages/cv2.so  && \
+  ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/cssc_env35_tf12/lib/python3.5/site-packages/cv2.so  && \
   rm -rf /root/opencv* && \
-  deactivate
+  deactivate && \
+
+
+
+
 
 LABEL a="update here"
 # for Nimbix, USER nimbix, for now use root
@@ -176,8 +192,7 @@ RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
   cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
 
 
-# Additional Fixes to integrate above
-RUN sudo apt-get install -y python3.6
+
 
 
 
@@ -195,7 +210,7 @@ ENV SPARK_HOME=/dl-labs/spark-2.3.0-bin-hadoop2.7
 WORKDIR /dl-labs 
 
 #COPY binaries/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  /dl-labs/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl
-#RUN . /root/cssc_env/bin/activate && \
+#RUN . /root/cssc_env35_tf12/bin/activate && \
 #  pip install /dl-labs/tensorflow-1.2.1-cp35-cp35m-linux_ppc64le.whl  && \
 #  git clone https://github.com/keras-team/keras.git  && \
 #  cd /dl-labs/keras  && \
@@ -205,7 +220,7 @@ WORKDIR /dl-labs
 
 ## Permissions patching
 RUN chown  nimbix:nimbix /root/  && \
-    chown -R nimbix:nimbix /root/cssc_env 
+    chown -R nimbix:nimbix /root/cssc_env35_tf12 
 
 
 
@@ -231,6 +246,9 @@ COPY startjupyter.sh /dl-labs
 
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
 # COPY rc.local /etc/rc.local
+
+
+
 
 
 #add NIMBIX application

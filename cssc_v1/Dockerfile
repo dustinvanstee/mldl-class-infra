@@ -1,5 +1,6 @@
 FROM nvidia/cuda-ppc64le:8.0-cudnn6-devel-ubuntu16.04 
 
+
 RUN apt-get -y update && \
     apt-get -y install curl && \
     curl -H 'Cache-Control: no-cache' \
@@ -17,10 +18,7 @@ EXPOSE 443
 WORKDIR /tmp
 ENV POWERAI_LINK https://public.dhe.ibm.com/software/server/POWER/Linux/mldl/ubuntu/mldl-repo-local_4.0.0_ppc64el.deb
 
-RUN curl -O "$POWERAI_LINK" && dpkg --install mldl*.deb && rm -f mldl*.deb
 
-# install packages
-RUN apt-get update && apt-get -y install power-mldl numactl && apt-get clean
 # COPY motd /etc/motd
 # COPY motd /etc/powerai_help.txt
 # COPY powerai_help.desktop /etc/skel/Desktop/powerai_help.desktop
@@ -28,10 +26,14 @@ RUN apt-get update && apt-get -y install power-mldl numactl && apt-get clean
 # RUN echo '\n*** Press Q to exit help.\n' >>/etc/powerai_help.txt
 
 
-# Run All the apt stuff first ....
 
-# Install packages
-RUN apt-get update && apt-get install -yq --no-install-recommends \
+RUN curl -O "$POWERAI_LINK" && dpkg --install mldl*.deb && rm -f mldl*.deb && \
+
+# install packages
+    apt-get update && apt-get -y install power-mldl numactl && \
+    # Run All the apt stuff first ....
+    # Install packages
+    apt-get update && apt-get install -yq --no-install-recommends \
     apt-utils \
     supervisor \
     git \
@@ -62,7 +64,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 # Update the repo ...
 # A lot of these libs are for opencv ...
 RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
-    add-apt-repository -y ppa:jonathonf/python-3.6 && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
     apt update -qq && \
     apt-get install -yq --no-install-recommends \
         libavcodec-dev \
@@ -83,14 +85,35 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
         libtbb2 \
         libtbb-dev \
         python-software-properties \
-        python3-pip \
-    && apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+        python3-pip && \
 
 #     #add Jupyter Virtual Envs
-RUN apt update && \
-    apt-get install -yq --no-install-recommends \
-        python3-dev 
+    apt update && \
+    apt-get install -yq --no-install-recommends python3-dev && \
+
+#
+# cssc_p2 -
+#
+
+
+# Add cssc_p2 Python2 Virtual ENV packages
+  pip install virtualenv && \
+  pip install --upgrade pip && \
+  virtualenv -p /usr/bin/python2.7 /root/python2_env && \
+  . /root/python2_env/bin/activate && \
+  pip install tornado \
+    ipython==5.0  \
+    notebook==5.0  \
+    pyyaml \
+    numpy \
+    scipy \
+    scikit-learn \
+    pillow \
+    h5py \
+    ipykernel \
+  && \
+  deactivate
+
 
 # Add Python3
 RUN  pip install virtualenv && \

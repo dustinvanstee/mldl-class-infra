@@ -145,44 +145,45 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
 # Build and Install opencv ~ long road ..
 WORKDIR /root
 
-RUN . /root/cssc_env35_tf12/bin/activate && \
-  cd /root && \
-  wget -O opencv.zip         https://github.com/opencv/opencv/archive/3.3.0.zip  && \
-  wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip  && \
-  unzip opencv.zip  && \
-  unzip opencv_contrib.zip && \
-  cd /root/opencv-3.3.0/ && \
-  mkdir /root/opencv-3.3.0/build  && \
-  cd /root/opencv-3.3.0/build && \
-  sudo cmake -D CMAKE_BUILD_TYPE=RELEASE \
-      -D CMAKE_INSTALL_PREFIX=/usr/local \
-      -D INSTALL_PYTHON_EXAMPLES=ON \
-      -D INSTALL_C_EXAMPLES=OFF \
-      -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib-3.3.0/modules \
-      -D WITH_CUDA=OFF \
-      -D PYTHON3_EXECUTABLE=/root/cssc_env35_tf12/bin/python3 \
-      -D WITH_QT=OFF \
-      -D WITH_OPENGL=OFF \
-      -D FORCE_VTK=OFF \
-      -D WITH_TBB=OFF \
-      -D WITH_GDAL=OFF \
-      -D WITH_XINE=OFF \
-      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/cssc_env35_tf12/lib/python3.5/site-packages/numpy/core/include/ \
-      -D PYTHON3_NUMPY_VERSION=1.14.0 \
-      -D BUILD_EXAMPLES=ON ..  && \
 
-  make -j10  && \
-  sudo make install  && \
-  sudo ldconfig && \
-  ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/cssc_env35_tf12/lib/python3.5/site-packages/cv2.so  && \
-  rm -rf /root/opencv* && \
-  deactivate && \
+# When you want openCV add this in ...
+################## Begin OpenCV ##################
+# 
+# RUN . /root/cssc_env35_tf12/bin/activate && \
+#   cd /root && \
+#   wget -O opencv.zip         https://github.com/opencv/opencv/archive/3.3.0.zip  && \
+#   wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip  && \
+#   unzip opencv.zip  && \
+#   unzip opencv_contrib.zip && \
+#   cd /root/opencv-3.3.0/ && \
+#   mkdir /root/opencv-3.3.0/build  && \
+#   cd /root/opencv-3.3.0/build && \
+#   sudo cmake -D CMAKE_BUILD_TYPE=RELEASE \
+#       -D CMAKE_INSTALL_PREFIX=/usr/local \
+#       -D INSTALL_PYTHON_EXAMPLES=ON \
+#       -D INSTALL_C_EXAMPLES=OFF \
+#       -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib-3.3.0/modules \
+#       -D WITH_CUDA=OFF \
+#       -D PYTHON3_EXECUTABLE=/root/cssc_env35_tf12/bin/python3 \
+#       -D WITH_QT=OFF \
+#       -D WITH_OPENGL=OFF \
+#       -D FORCE_VTK=OFF \
+#       -D WITH_TBB=OFF \
+#       -D WITH_GDAL=OFF \
+#       -D WITH_XINE=OFF \
+#       -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/cssc_env35_tf12/lib/python3.5/site-packages/numpy/core/include/ \
+#       -D PYTHON3_NUMPY_VERSION=1.14.0 \
+#       -D BUILD_EXAMPLES=ON ..  && \
+# 
+#   make -j10  && \
+#   sudo make install  && \
+#   sudo ldconfig && \
+#   ln -fs /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-powerpc64le-linux-gnu.so /root/cssc_env35_tf12/lib/python3.5/site-packages/cv2.so  && \
+#   rm -rf /root/opencv* && \
+#   deactivate 
+################## End OpenCV ##################
 
 
-
-
-
-LABEL a="update here"
 # for Nimbix, USER nimbix, for now use root
 USER root
 RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
@@ -190,11 +191,6 @@ RUN mkdir -p /dl-labs && chown nimbix:nimbix /dl-labs && cd /dl-labs && \
   wget http://apache.claz.org/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz && \
   tar -zxvf spark-2.3.0-bin-hadoop2.7.tgz && \
   cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
-
-
-
-
-
 
 
 # wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz && \
@@ -220,8 +216,8 @@ WORKDIR /dl-labs
 
 ## Permissions patching
 RUN chown  nimbix:nimbix /root/  && \
-    chown -R nimbix:nimbix /root/cssc_env35_tf12 
-
+    chown -R nimbix:nimbix /root/cssc_env35_tf12 && \
+    chown -R nimbix:nimbix /root/cssc_env36_tf18 
 
 
 # Simple utilities(cmt)

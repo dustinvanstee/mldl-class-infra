@@ -129,8 +129,8 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
   && pip install  --force-reinstall jupyter &&\
   deactivate && \
 # Add cssc_env36_tf18 Python3 virtual environment
-  sudo apt-get install -y python3.6 && \
-  virtualenv -p /usr/bin/python3 /root/cssc_env36_tf18 && \
+  sudo apt-get install -y python3.6 
+RUN virtualenv -p /usr/bin/python3.6 /root/cssc_env36_tf18 && \
   . /root/cssc_env36_tf18/bin/activate && \
   pip install numpy \
     scipy \

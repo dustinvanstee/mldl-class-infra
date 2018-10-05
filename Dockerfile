@@ -1,6 +1,7 @@
 FROM dustinvanstee:powerai52
 USER root
-RUN apt install -y  git
+RUN apt-get update
+RUN apt-get install -y git-core
 
 # Simple utilities(cmt)
 COPY motd /etc/motd

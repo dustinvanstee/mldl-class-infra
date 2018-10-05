@@ -1,4 +1,4 @@
-FROM ibmcom/powerai
+FROM dustinvanstee:powerai52
 RUN apt-get -y install git
 
 # Simple utilities(cmt)

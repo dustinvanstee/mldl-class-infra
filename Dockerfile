@@ -1,5 +1,5 @@
 FROM ibmcom/powerai
-RUN ls
+RUN apt-get -y install git
 
 # Simple utilities(cmt)
 COPY motd /etc/motd

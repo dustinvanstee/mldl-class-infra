@@ -1,11 +1,11 @@
 FROM dustinvanstee:powerai52
-RUN yum install -y  git
+USER root
+RUN apt install -y  git
 
 # Simple utilities(cmt)
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 
-USER root
 RUN mkdir -p /dl-labs  && cd /dl-labs && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
   wget http://apache.claz.org/spark/spark-2.1.2/spark-2.1.2-bin-hadoop2.7.tgz && \

@@ -57,7 +57,7 @@
             "name": "Server",
             "description": "Launch and ephemeral environment and connect via SSH or graphical browser window. Save any persistent data, code, or prototypes in /data to be able to access again in the future.",            
             "scale_max": 1,
-            "walltime": "01:30:00",
+            "walltime": "01:15:00",
             "parameters": {}
         } 
     },

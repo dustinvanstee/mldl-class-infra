@@ -1,5 +1,5 @@
 FROM dustinvanstee:powerai52
-# RUN yum install -y  git
+RUN yum install -y  git
 
 # Simple utilities(cmt)
 COPY motd /etc/motd

@@ -1,0 +1,63 @@
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+53b7c46cdc24        4 days ago          /bin/sh -c curl --fail -X POST -d @/etc/NAE/A   0 B                 
+270a7934f48f        4 days ago          /bin/sh -c #(nop) COPY file:6095e3fcd33eab374   80.27 kB            
+c812730b7ff4        4 days ago          /bin/sh -c #(nop)  ENV SPARK_HOME=/data2/spar   0 B                 
+503ec9b00973        4 days ago          /bin/sh -c #(nop)  ENV JAVA_HOME=/usr/lib/jvm   0 B                 
+58cdd0c3afb2        4 days ago          /bin/sh -c DEBIAN_FRONTEND=noninteractive apt   152.9 MB            
+f76ef28e2916        4 days ago          /bin/sh -c mkdir -p /data2 && chown nimbix:ni   1.02 GB             
+4941ba57dcb3        4 days ago          /bin/sh -c #(nop)  USER [root]                  0 B                 
+34ba59a574ea        4 days ago          /bin/sh -c #(nop) COPY file:8bde0d447913126e7   30 B                
+1a529cbd370b        4 days ago          /bin/sh -c #(nop) COPY file:bb673c8352f8d37d2   190 B               
+b78fcca7edeb        4 days ago          /bin/sh -c apt-get update &&     apt-get -y u   579.5 MB            
+f6593c548517        4 days ago          /bin/sh -c pip3 install scipy                   0 B                 
+0d86dad72a0f        4 days ago          /bin/sh -c pip3 install matplotlib numpy  pan   474.4 MB            
+ad7b70c3915c        4 days ago          /bin/sh -c apt-get install -y python-software   141.5 MB            
+2601ded30c5c        4 days ago          /bin/sh -c pip install --upgrade pip &&     p   78.65 MB            
+c1a985f17c29        4 days ago          /bin/sh -c apt-get -y install libavcodec-dev    343.6 MB            
+02a56e3ed129        5 days ago          /bin/sh -c apt-get update && apt-get -y insta   50.69 MB            
+940a49850353        5 days ago          /bin/sh -c apt-get update &&         apt-get    41.38 MB            
+a65a2751ddcf        5 days ago          /bin/sh -c apt-get update && apt-get install    1.312 GB            
+3667fce5d932        3 months ago        /bin/sh -c apt-get install -y git               0 B                 
+216d788f65b9        3 months ago        /bin/sh -c apt-get install -y supervisor        7.377 MB            
+9636afd95104        3 months ago        /bin/sh -c apt-get update && apt-get install    9.774 MB            
+c16c43ae710a        3 months ago        /bin/sh -c pip install ipython==5.0 notebook=   52.29 MB            
+b0cbc4ba2432        4 months ago        /bin/sh -c echo '\n*** Press Q to exit help.\   949 B               
+<missing>           4 months ago        /bin/sh -c chmod 555 /etc/skel/Desktop/powera   259 B               
+<missing>           4 months ago        /bin/sh -c #(nop) COPY file:cba3ae1dba9eafdf1   259 B               
+<missing>           4 months ago        /bin/sh -c #(nop) COPY file:80ffeb8c4e0586d01   921 B               
+<missing>           4 months ago        /bin/sh -c #(nop) COPY file:80ffeb8c4e0586d01   921 B               
+<missing>           4 months ago        /bin/sh -c apt-get update && apt-get -y upgra   3.77 GB             
+<missing>           4 months ago        /bin/sh -c curl -O "$POWERAI_LINK" && dpkg --   388.5 MB            
+<missing>           4 months ago        /bin/sh -c #(nop)  ENV POWERAI_LINK=https://p   0 B                 
+<missing>           4 months ago        /bin/sh -c #(nop)  WORKDIR /tmp                 0 B                 
+<missing>           4 months ago        /bin/sh -c #(nop)  EXPOSE 443/tcp               0 B                 
+<missing>           4 months ago        /bin/sh -c #(nop)  EXPOSE 5901/tcp              0 B                 
+<missing>           4 months ago        /bin/sh -c #(nop)  EXPOSE 22/tcp                0 B                 
+<missing>           4 months ago        /bin/sh -c curl -H 'Cache-Control: no-cache'    1.377 GB            
+<missing>           4 months ago        /bin/sh -c apt-get update && apt-get -y insta   56.67 MB            
+<missing>           5 months ago        /bin/sh -c apt-get update && apt-get install    300 MB              
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL com.nvidia.cudnn.ver   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  ENV CUDNN_VERSION=6.0.21     0 B                 
+<missing>           5 months ago        /bin/sh -c echo "deb http://developer.downloa   93 B                
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL maintainer=NVIDIA CO   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  ENV LIBRARY_PATH=/usr/loca   0 B                 
+<missing>           5 months ago        /bin/sh -c apt-get update && apt-get install    898.7 MB            
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL maintainer=NVIDIA CO   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL com.nvidia.build.id=   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  ENV LD_LIBRARY_PATH=/usr/l   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  ENV PATH=/usr/local/nvidia   0 B                 
+<missing>           5 months ago        /bin/sh -c echo "/usr/local/nvidia/lib" >> /e   46 B                
+<missing>           5 months ago        /bin/sh -c echo "/usr/local/cuda/lib64" >> /e   19.73 kB            
+<missing>           5 months ago        /bin/sh -c apt-get update && apt-get install    660.1 MB            
+<missing>           5 months ago        /bin/sh -c #(nop)  ENV CUDA_PKG_VERSION=8-0=8   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL com.nvidia.cuda.vers   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  ENV CUDA_VERSION=8.0.61      0 B                 
+<missing>           5 months ago        /bin/sh -c NVIDIA_GPGKEY_SUM=d1be581509378368   25.73 kB            
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL com.nvidia.volumes.n   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  LABEL maintainer=NVIDIA CO   0 B                 
+<missing>           5 months ago        /bin/sh -c #(nop)  CMD ["/bin/bash"]            0 B                 
+<missing>           5 months ago        /bin/sh -c mkdir -p /run/systemd && echo 'doc   7 B                 
+<missing>           5 months ago        /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$/   2.833 kB            
+<missing>           5 months ago        /bin/sh -c rm -rf /var/lib/apt/lists/*          0 B                 
+<missing>           5 months ago        /bin/sh -c set -xe   && echo '#!/bin/sh' > /u   745 B               
+<missing>           5 months ago        /bin/sh -c #(nop) ADD file:7660e3164e464cfd5b   158.5 MB            

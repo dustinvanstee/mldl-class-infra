@@ -1,4 +1,4 @@
-FROM nvidia/cuda-ppc64le:8.0-cudnn6-devel-ubuntu16.04 
+FROM ibmcom/powerai 
 
 
 RUN apt-get -y update && \

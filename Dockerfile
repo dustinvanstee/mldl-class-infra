@@ -1,4 +1,4 @@
-FROM dustinvanstee:powerai52
+FROM dustinvanstee:powerai-1.5.3-py3
 USER root
 # Install packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \

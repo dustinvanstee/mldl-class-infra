@@ -61,7 +61,8 @@ RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -s
 #     #add Jupyter Virtual Envs
 RUN apt update && \
     apt-get install -yq --no-install-recommends \
-        python3-dev 
+        python3-dev \
+        python3-pip
 
 # Add Python3
 RUN  pip install virtualenv && \

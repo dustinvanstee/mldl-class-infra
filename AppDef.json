@@ -1,5 +1,5 @@
 {
-    "name": "yolo_mldl_education",
+    "name": "techu_mldl_education",
     "description": "SSH into instance with user id: nimbix@<fqdn> and password.  Jupyter instructions posted at login.",
     "author": "vanstee@us.ibm.com",
     "licensed": true,

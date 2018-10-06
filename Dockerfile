@@ -1,7 +1,33 @@
 FROM dustinvanstee:powerai52
 USER root
-RUN apt-get update
-RUN apt-get install -y git-core
+# Install packages
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    apt-utils \
+    supervisor \
+    git \
+    vim \
+    jed \
+    emacs \
+    build-essential \
+    python-dev \
+    unzip \
+    libsm6 \
+    pandoc \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    texlive-fonts-recommended \
+    texlive-generic-recommended \
+    libxrender1 \
+    inkscape \
+    lsof \
+    locate \
+    iputils-ping \
+    libav-tools \
+    software-properties-common \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
 
 # Simple utilities(cmt)
 COPY motd /etc/motd

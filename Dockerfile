@@ -30,28 +30,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
      
 
-
-# Build and Install opencv ~ long road ..
-WORKDIR /root
-   
-
-# Simple utilities(cmt)
-COPY motd /etc/motd
-COPY motd /etc/powerai_help.txt
-
-
-
-RUN mkdir -p /dl-labs  && cd /dl-labs && \
-  git clone https://github.com/dustinvanstee/mldl-101.git && \
-  cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
-
-
-RUN /root/anaconda3/bin/conda update -n base conda && \
-  /root/anaconda3/bin/conda install jupyter 
-
-#&& \
-#  /opt/DL/tensorflow/bin/install_dependencies && \
-#  /root/anaconda3/bin/conda install -c conda-forge opencv
 #add NIMBIX application
 
 RUN apt-get -y update && \
@@ -66,6 +44,45 @@ EXPOSE 22
 # for standalone use
 EXPOSE 5901
 EXPOSE 443
+
+   
+# Simple utilities(cmt)
+COPY motd /etc/motd
+COPY motd /etc/powerai_help.txt
+
+RUN mkdir -p /dl-labs  && cd /dl-labs && \
+  git clone https://github.com/dustinvanstee/mldl-101.git && \
+  cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
+
+
+RUN /root/anaconda3/bin/conda update -n base conda && \
+  /root/anaconda3/bin/conda install jupyter 
+
+#&& \
+#  /opt/DL/tensorflow/bin/install_dependencies && \
+#  /root/anaconda3/bin/conda install -c conda-forge opencv
+
+
+# Autostart Jupyter
+COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
+COPY conf.d/jupyter_notebook_config.py /dl-labs/.jupyter/
+LABEL a="a3"
+COPY startjupyter.sh /dl-labs
+
+#add startupscripts
+WORKDIR /dl-labs
+# ADD startdigits.sh  /root/
+#ADD starttensorboard.sh /root/ 
+COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
+
+# Add this to autostart jupyter in /dl-labs ... disabling for now ....
+# COPY rc.local /etc/rc.local
+
+
+
+
+
+
 
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate

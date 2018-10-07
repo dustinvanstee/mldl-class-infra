@@ -46,10 +46,10 @@ RUN mkdir -p /dl-labs  && cd /dl-labs && \
   cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
 
 
-RUN conda update -n base conda && \
-  conda install jupyter && \
+RUN /root/anaconda3/bin/conda update -n base conda && \
+  /root/anaconda3/bin/conda install jupyter && \
   /opt/DL/tensorflow/bin/install_dependencies && \
-  conda install -c conda-forge opencv
+  /root/anaconda3/bin/conda install -c conda-forge opencv
 
 #add NIMBIX application
 

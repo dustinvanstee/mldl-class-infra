@@ -47,10 +47,11 @@ RUN mkdir -p /dl-labs  && cd /dl-labs && \
 
 
 RUN /root/anaconda3/bin/conda update -n base conda && \
-  /root/anaconda3/bin/conda install jupyter && \
-  /opt/DL/tensorflow/bin/install_dependencies && \
-  /root/anaconda3/bin/conda install -c conda-forge opencv
+  /root/anaconda3/bin/conda install jupyter 
 
+#&& \
+#  /opt/DL/tensorflow/bin/install_dependencies && \
+#  /root/anaconda3/bin/conda install -c conda-forge opencv
 #add NIMBIX application
 
 RUN apt-get -y update && \

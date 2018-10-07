@@ -76,11 +76,7 @@ WORKDIR /dl-labs
 COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
-# COPY rc.local /etc/rc.local
-
-
-
-
+COPY rc.local /etc/rc.local
 
 
 

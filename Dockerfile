@@ -56,8 +56,7 @@ RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
   cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
 
 
-RUN /root/anaconda3/bin/conda update -n base conda && \
-  /root/anaconda3/bin/conda install jupyter 
+RUN /root/anaconda3/bin/conda install jupyter 
 
 #&& \
 #  /opt/DL/tensorflow/bin/install_dependencies && \

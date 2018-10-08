@@ -61,7 +61,9 @@ RUN /root/anaconda3/bin/conda install jupyter
 #  /opt/DL/tensorflow/bin/install_dependencies && \
 #  /root/anaconda3/bin/conda install -c conda-forge opencv
 
-LABEL VERSION="V1.1"
+RUN chown -R pwrai:pwrai /dl-labs
+
+LABEL VERSION="V1.2"
 
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
@@ -77,7 +79,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
 COPY rc.local /etc/rc.local
 COPY supervisord.conf /etc/supervisor/supervisord.conf
-RUN chown -R pwrai:pwrai /dl-labs
+RUN chmod 744 /etc/rc.local
 
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate

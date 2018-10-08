@@ -77,7 +77,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
 COPY rc.local /etc/rc.local
 COPY supervisord.conf /etc/supervisor/supervisord.conf
-
+RUN chown -R pwrai:pwrai /dl-labs
 
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate

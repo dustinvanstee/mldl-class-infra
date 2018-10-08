@@ -1,5 +1,6 @@
 {
   "NotebookApp": {
-    "password": "sha1:23c2eb879e10:6e429a2a19a7bc065691513b52ac0807fe77adef"
+    "comment" : "https://testnb.readthedocs.io/en/stable/examples/Notebook/Configuring%20the%20Notebook%20and%20Server.html",
+    "password": "sha1:1a13797933b9:bc41a23ec00c8f4f036aaeacade79e01e3f2345c"
   }
 }

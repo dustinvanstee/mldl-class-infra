@@ -80,6 +80,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 COPY rc.local /etc/rc.local
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 RUN chmod 744 /etc/rc.local
+EXPOSE 5050
 
 COPY AppDef.json /etc/NAE/AppDef.json
 RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate

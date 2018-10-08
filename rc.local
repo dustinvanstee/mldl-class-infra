@@ -11,6 +11,6 @@
 #
 # By default this script does nothing.
 echo "Running supervisord !"
-supervisord -c /etc/supervisor/supervisord.conf --user=pwrai
+supervisord -c /etc/supervisor/supervisord.conf
 
 exit 0

@@ -16,8 +16,8 @@ else
    echo "File $FILE does not exist. Must be on a CPU box .."
    echo linking....
    ln -fs  /usr/local/$CUDA_VERSION_JS/targets/ppc64le-linux/lib/stubs/libcuda.so $FILE  
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/$CUDA_VERSION_JS/targets/ppc64le-linux/lib/stubs/
 fi
-
 
 cd /dl-labs/mldl-101
 jupyter notebook --ip=0.0.0.0 --allow-root --port=5050 --no-browser --config /dl-labs/.jupyter/jupyter_notebook_config.json

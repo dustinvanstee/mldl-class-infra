@@ -56,12 +56,13 @@ RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
 
 
 # Note, this may override tf 1.8!!
-RUN /root/anaconda3/bin/conda install jupyter && \
-    /root/anaconda3/bin/conda install keras
+RUN /root/anaconda3/bin/conda install jupyter
+
+#   /root/anaconda3/bin/conda install keras
 
 #&& \
 #  /opt/DL/tensorflow/bin/install_dependencies && \
-#  /root/anaconda3/bin/conda install -c conda-forge opencv
+#  /root/anaconda3/bin/conda install -c conda-forge opencv=3.3.0
 
 RUN chown -R pwrai:pwrai /dl-labs
 

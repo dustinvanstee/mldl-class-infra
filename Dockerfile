@@ -66,7 +66,7 @@ RUN /root/anaconda3/bin/conda install jupyter
 
 RUN chown -R pwrai:pwrai /dl-labs
 
-LABEL VERSION="V1.3"
+LABEL VERSION="V1.4"
 
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
@@ -82,8 +82,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
 COPY rc.local /etc/rc.local
 COPY supervisord.conf /etc/supervisor/supervisord.conf
-RUN chmod 744 /etc/rc.local
-RUN /etc/rc.local
+RUN chmod 755 /etc/rc.local
 EXPOSE 5050
 
 COPY AppDef.json /etc/NAE/AppDef.json

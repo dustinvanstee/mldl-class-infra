@@ -76,9 +76,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
 COPY rc.local /etc/rc.local
-COPY supervisor.conf /etc/supervisor/supervisor.conf
-
-RUN chmod 777 /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 
 COPY AppDef.json /etc/NAE/AppDef.json

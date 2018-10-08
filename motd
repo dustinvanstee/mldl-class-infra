@@ -27,13 +27,8 @@ Please be sure to save any persistent code or data in the /data directory!
 
 ############ Image Instructions ##########################
 
-To run jupyter notebooks, run the following commands :
+Jupyter notebook should autostart using supervisord configuration
+Check /dl-labs/supervisor for log information
 
-source /root/python2_env/bin/activate
-cd /dl-labs/mldl-101
- or
-cd /data/mldl-101
-git pull origin master 
-./startClass2.sh -g 1 # if cpu machine then -g 0
 
-Then point your browser to hostname:5050 and get started
+Notebook should be on hostname:5050 password = [techulab]

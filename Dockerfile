@@ -51,7 +51,7 @@ LABEL a="restart here"
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 
-RUN mkdir -p /dl-labs  && cd /dl-labs && \
+RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
   cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
 
@@ -77,7 +77,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 
 # Add this to autostart jupyter in /dl-labs ... disabling for now ....
 COPY rc.local /etc/rc.local
-
+RUN chmod 777 /var/log/supervisor
 
 
 COPY AppDef.json /etc/NAE/AppDef.json

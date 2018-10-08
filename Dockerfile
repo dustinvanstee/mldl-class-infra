@@ -29,7 +29,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
      
-LABEL a="restart here"
 
 #add NIMBIX application
 
@@ -62,6 +61,7 @@ RUN /root/anaconda3/bin/conda install jupyter
 #  /opt/DL/tensorflow/bin/install_dependencies && \
 #  /root/anaconda3/bin/conda install -c conda-forge opencv
 
+LABEL a="restart here"
 
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/

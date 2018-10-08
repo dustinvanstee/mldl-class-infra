@@ -61,7 +61,7 @@ RUN /root/anaconda3/bin/conda install jupyter
 #  /opt/DL/tensorflow/bin/install_dependencies && \
 #  /root/anaconda3/bin/conda install -c conda-forge opencv
 
-LABEL a="restart here"
+LABEL VERSION="V1"
 
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/

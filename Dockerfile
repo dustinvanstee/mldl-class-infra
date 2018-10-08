@@ -65,7 +65,7 @@ RUN /root/anaconda3/bin/conda install jupyter && \
 
 RUN chown -R pwrai:pwrai /dl-labs
 
-LABEL VERSION="V1.2"
+LABEL VERSION="V1.3"
 
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/

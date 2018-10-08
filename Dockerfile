@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
      
+LABEL a="restart here"
 
 #add NIMBIX application
 
@@ -66,7 +67,6 @@ RUN /root/anaconda3/bin/conda update -n base conda && \
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/
 COPY conf.d/jupyter_notebook_config.py /dl-labs/.jupyter/
-LABEL a="a3"
 COPY startjupyter.sh /dl-labs
 
 #add startupscripts

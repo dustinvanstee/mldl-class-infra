@@ -117,9 +117,11 @@ RUN cd /root && \
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 
+LABEL VERSION="V1.5"
+
 RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
-  cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v1.0/yolo_power.h5 -O yolo.h5
+  cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v2.0/yolo_power.h5 -O yolo.h5
 
 
 # Note, this may override tf 1.8!!
@@ -132,8 +134,6 @@ RUN /root/anaconda3/bin/conda install jupyter
 #  /root/anaconda3/bin/conda install -c conda-forge opencv=3.3.0
 
 RUN chown -R pwrai:pwrai /dl-labs
-
-LABEL VERSION="V1.4"
 
 # Autostart Jupyter
 COPY conf.d/jupyter_notebook_config.json /dl-labs/.jupyter/

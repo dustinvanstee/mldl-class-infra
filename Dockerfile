@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
      
 
-#add NIMBIX application
+################### add NIMBIX application ###################
 
 # RUN apt-get -y update && \
 #     apt-get -y install curl && \
@@ -45,7 +45,75 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 # EXPOSE 5901
 # EXPOSE 443
 
-   
+
+################### add OPENCV application ###################
+# A lot of these libs are for opencv ...
+RUN add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" && \ 
+    add-apt-repository -y ppa:jonathonf/python-3.6 && \
+    apt update -qq && \
+    apt-get install -yq --no-install-recommends \
+        libavcodec-dev \
+        libavformat-dev \
+        libswscale-dev \
+        libv4l-dev \
+        libxvidcore-dev \ 
+        libx264-dev \
+        libgtk-3-dev \
+        libatlas-base-dev \
+        libjpeg-dev \
+        libdc1394-22-dev \
+        gfortran \
+        cmake \ 
+        libgtk2.0-dev \
+        pkg-config \
+        python-dev \ 
+        libtbb2 \
+        libtbb-dev \
+        python-software-properties \
+        python3-pip \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Build and Install opencv ~ long road ..
+WORKDIR /root
+
+RUN cd /root && \
+  wget -O opencv.zip         https://github.com/opencv/opencv/archive/3.3.0.zip  && \
+  wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip  && \
+  unzip opencv.zip  && \
+  unzip opencv_contrib.zip && \
+  cd /root/opencv-3.3.0/ && \
+  mkdir /root/opencv-3.3.0/build  && \
+  cd /root/opencv-3.3.0/build && \
+  sudo cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D INSTALL_C_EXAMPLES=OFF \
+      -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib-3.3.0/modules \
+      -D WITH_CUDA=OFF \
+      -D PYTHON3_EXECUTABLE=/root/anaconda3/bin/python3 \
+      -D WITH_QT=OFF \
+      -D WITH_OPENGL=OFF \
+      -D FORCE_VTK=OFF \
+      -D WITH_TBB=OFF \
+      -D WITH_GDAL=OFF \
+      -D WITH_XINE=OFF \
+      -D PYTHON3_NUMPY_INCLUDE_DIRS=/root/anaconda3/lib/python3.6/site-packages/numpy/core/include/ \
+      -D PYTHON3_NUMPY_VERSION=1.14.0 \
+      -D BUILD_EXAMPLES=ON ..  && \
+
+  make -j10  && \
+  sudo make install  && \
+  sudo ldconfig
+
+  RUN ln -fs /usr/local/lib/python3.6/site-packages/cv2.cpython-36m-powerpc64le-linux-gnu.so /root/anaconda3/lib/python3.6/site-packages/cv2.so  && \
+  rm -rf /root/opencv* && \
+  deactivate
+
+
+
+################### add Labs specific ###################
+
 # Simple utilities(cmt)
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
@@ -83,6 +151,7 @@ COPY conf.d/tensorflow_jupyter.conf /etc/supervisor/conf.d/
 COPY rc.local /etc/rc.local
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 RUN chmod 755 /etc/rc.local
+RUN update-rc.d rc.local enable 2
 EXPOSE 5050
 
 COPY AppDef.json /etc/NAE/AppDef.json

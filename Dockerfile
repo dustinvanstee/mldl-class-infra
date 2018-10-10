@@ -107,8 +107,7 @@ RUN cd /root && \
   sudo ldconfig
 
   RUN ln -fs /usr/local/lib/python3.6/site-packages/cv2.cpython-36m-powerpc64le-linux-gnu.so /root/anaconda3/lib/python3.6/site-packages/cv2.so  && \
-  rm -rf /root/opencv* && \
-  deactivate
+  rm -rf /root/opencv* 
 
 
 

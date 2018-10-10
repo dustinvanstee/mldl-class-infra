@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     locate \
     iputils-ping \
     libav-tools \
+    file \
     software-properties-common \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -107,7 +108,8 @@ RUN cd /root && \
   sudo ldconfig
 
   RUN ln -fs /usr/local/lib/python3.6/site-packages/cv2.cpython-36m-powerpc64le-linux-gnu.so /root/anaconda3/lib/python3.6/site-packages/cv2.so  && \
-  rm -rf /root/opencv* 
+  rm -rf /root/opencv*  && \
+  /usr/local/bin/restore_codecs
 
 
 
@@ -126,13 +128,6 @@ RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
 
 # Note, this may override tf 1.8!!
 RUN /root/anaconda3/bin/conda install jupyter
-
-#   /root/anaconda3/bin/conda install keras
-
-#&& \
-#  /opt/DL/tensorflow/bin/install_dependencies && \
-#  /root/anaconda3/bin/conda install -c conda-forge opencv=3.3.0
-
 RUN chown -R pwrai:pwrai /dl-labs
 
 # Autostart Jupyter

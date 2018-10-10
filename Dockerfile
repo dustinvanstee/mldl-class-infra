@@ -121,7 +121,7 @@ LABEL VERSION="V1.5"
 
 RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
-  cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v2.0/yolo_power.h5 -O yolo.h5
+  cd /dl-labs/mldl-101/lab4-yolo-keras/model_data && wget https://github.com/dustinvanstee/mldl-101/releases/download/v2.0/yolo.h5 -O yolo.h5
 
 
 # Note, this may override tf 1.8!!

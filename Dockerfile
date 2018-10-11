@@ -119,7 +119,7 @@ RUN cd /root && \
 COPY motd /etc/motd
 COPY motd /etc/powerai_help.txt
 
-LABEL VERSION="V1.5"
+LABEL VERSION="V1.6"
 
 RUN mkdir -p /dl-labs/supervisor  && cd /dl-labs && \
   git clone https://github.com/dustinvanstee/mldl-101.git && \
